@@ -1,0 +1,27 @@
+<div>
+    <button (click)="createShortenedUrl()"
+        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+        Add link
+    </button>
+
+    <button (click)="logout()"
+        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+        Logout
+    </button>
+
+    <div>
+        <div class="container mx-auto p-4">
+            <h3 class="text-2xl font-bold text-center mb-6">Urls</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                @for (url of urls; track url.id) {
+                <a class="bg-white shadow-md rounded-lg p-4" [href]="url.originalUrl" target="_blank">
+                    <h4 class=" font-semibold">{{ url.shortUrl }}</h4>
+                    <p>{{ url.originalUrl }}</p>
+                </a>
+                } @empty {
+                Empty list of urls
+                }
+            </div>
+        </div>
+    </div>
+</div>
