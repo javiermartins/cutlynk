@@ -1,0 +1,18 @@
+<header tuiNavigationHeader>
+    <span tuiNavigationLogo>
+        <span tuiFade class="text-lg">Cutlynk</span>
+    </span>
+    <hr />
+    <button [style.border-radius.%]="100" [tuiDropdown]="content" [(tuiDropdownOpen)]="openMenu">
+        <tui-avatar src="@tui.user" />
+    </button>
+    <ng-template #content>
+        <tui-data-list>
+            <tui-opt-group>
+                <button tuiOption type="button" (click)="logout()">
+                    Logout
+                </button>
+            </tui-opt-group>
+        </tui-data-list>
+    </ng-template>
+</header>

@@ -1,23 +1,42 @@
 <div>
-    <button (click)="createShortenedUrl()"
-        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-        Add link
-    </button>
-
-    <button (click)="logout()"
-        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-        Logout
-    </button>
+    <div class="flex mx-16 my-12">
+        <form [formGroup]="form" class="flex-grow">
+            <tui-input formControlName="originalUrl" class="w-full" tuiTextfieldSize="m"
+                [tuiTextfieldLabelOutside]="true">
+                <input tuiTextfieldLegacy class="w-full" />
+            </tui-input>
+        </form>
+        <button appearance="whiteblock" tuiButton type="button" size="m" class="mx-5" (click)="createShortenedUrl()">
+            Add link
+        </button>
+    </div>
 
     <div>
-        <div class="container mx-auto p-4">
-            <h3 class="text-2xl font-bold text-center mb-6">Urls</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
                 @for (url of urls; track url.id) {
-                <a class="bg-white shadow-md rounded-lg p-4" [href]="url.originalUrl" target="_blank">
-                    <h4 class=" font-semibold">{{ url.shortUrl }}</h4>
-                    <p>{{ url.originalUrl }}</p>
-                </a>
+                <div tuiCardMedium tuiSurface class="url-card shadow-sm">
+                    <header>
+                        <h2 tuiTitle>
+                            <a [href]="url.originalUrl" target="_blank">{{url.shortUrl}}</a>
+                            <span tuiSubtitle>{{url.originalUrl}}</span>
+                        </h2>
+                    </header>
+                    <footer>
+                        <button appearance="whiteblock" iconStart="@tui.copy" size="s" tuiIconButton type="button"
+                            class="mr-1" (click)="copyUrlToClipboard(url)">
+                            Copy
+                        </button>
+                        <button appearance="whiteblock" iconStart="@tui.pencil" size="s" tuiIconButton type="button"
+                            class="mr-1" disabled>
+                            Edit
+                        </button>
+                        <button appearance="whiteblock" iconStart="@tui.trash" size="s" tuiIconButton type="button"
+                            (click)="deleteUrl(url)">
+                            Delete
+                        </button>
+                    </footer>
+                </div>
                 } @empty {
                 Empty list of urls
                 }

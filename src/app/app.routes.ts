@@ -5,6 +5,7 @@ import { ErrorComponent } from './pages/error/error.component';
 import { authGuard } from './guards/auth/auth.guard';
 import { loginGuard } from './guards/login/login.guard';
 import { LayoutComponent } from './components/layout/layout.component';
+import { RedirectComponent } from './pages/redirect/redirect.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '', pathMatch: 'full' },
@@ -18,5 +19,6 @@ export const routes: Routes = [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent }
         ],
-    }
+    },
+    { path: ':shortUrl', component: RedirectComponent },
 ];

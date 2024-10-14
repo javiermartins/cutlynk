@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { account } from '../../../lib/appwrite';
 import { OAuthProvider } from 'appwrite';
+import { TuiButton } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TuiButton],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
