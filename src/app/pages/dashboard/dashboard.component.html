@@ -1,12 +1,6 @@
 <div>
     <div class="flex mx-16 my-12">
-        <form [formGroup]="form" class="flex-grow">
-            <tui-input formControlName="originalUrl" class="w-full" tuiTextfieldSize="m"
-                [tuiTextfieldLabelOutside]="true">
-                <input tuiTextfieldLegacy class="w-full" />
-            </tui-input>
-        </form>
-        <button appearance="whiteblock" tuiButton type="button" size="m" class="mx-5" (click)="createShortenedUrl()">
+        <button appearance="whiteblock" tuiButton type="button" size="m" (click)="openNewUrl()">
             Add link
         </button>
     </div>

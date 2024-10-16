@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, INJECTOR, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { UrlService } from '../../services/url/url.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TuiInputModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
-import { TuiButton, TuiIcon, TuiSurface, TuiTitle } from '@taiga-ui/core';
+import { TuiButton, TuiDialogOptions, TuiDialogService, TuiIcon, TuiSurface, TuiTitle } from '@taiga-ui/core';
 import { TuiCardMedium, TuiHeader } from '@taiga-ui/layout';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { NewUrlComponent } from '../../dialogs/new-url/new-url.component';
+import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
 
 @Component({
     selector: 'app-dashboard',
@@ -18,12 +20,11 @@ import { Clipboard } from '@angular/cdk/clipboard';
     styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
+    private readonly dialogs = inject(TuiDialogService);
+    private readonly injector = inject(INJECTOR);
 
     public urls: any;
     private user: any;
-    protected readonly form = new FormGroup({
-        originalUrl: new FormControl(''),
-    });
 
     constructor(
         private authService: AuthService,
@@ -44,36 +45,6 @@ export class DashboardComponent implements OnInit {
         this.user = await this.authService.getUser();
     }
 
-    async createShortenedUrl() {
-        const data = {
-            originalUrl: this.form.controls['originalUrl'].value,
-            shortUrl: this.base62Encode(),
-            userId: this.user.$id
-        }
-
-        await this.urlService.createShortenedUrl(data).then(() => {
-            this.form.controls['originalUrl'].setValue('');
-        }).catch((error: any) => {
-            if (error.type == 'document_already_exists') {
-                console.log('Document with the requested ID already exists');
-            }
-        });
-        await this.getUserUrls();
-    }
-
-    base62Encode(): string {
-        const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-        const length = 6;
-        let result = '';
-
-        for (let i = 0; i < length; i++) {
-            const randomIndex = Math.floor(Math.random() * chars.length);
-            result += chars[randomIndex];
-        }
-
-        return result;
-    }
-
     async getUserUrls() {
         this.urlService.getUserUrls(this.user.$id).then((urls) => {
             this.urls = urls.documents;
@@ -88,6 +59,26 @@ export class DashboardComponent implements OnInit {
 
     copyUrlToClipboard(url: any) {
         this.clipboard.copy(`http://localhost:4200/${url.shortUrl}`);
+    }
+
+    openNewUrl() {
+        const dialogOptions: Partial<TuiDialogOptions<any>> = {
+            closeable: false,
+            dismissible: true,
+            data: {
+                user: this.user
+            }
+        }
+
+        this.dialogs
+            .open(new PolymorpheusComponent(NewUrlComponent, this.injector), dialogOptions)
+            .subscribe({
+                next: async (value: any) => {
+                    if (value) {
+                        await this.getUserUrls();
+                    }
+                },
+            });
     }
 
 }

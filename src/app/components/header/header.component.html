@@ -1,4 +1,4 @@
-<header tuiNavigationHeader>
+<header tuiNavigationHeader class="!py-7">
     <span tuiNavigationLogo>
         <span tuiFade class="text-lg">Cutlynk</span>
     </span>
@@ -10,6 +10,7 @@
         <tui-data-list>
             <tui-opt-group>
                 <button tuiOption type="button" (click)="logout()">
+                    <tui-icon icon="@tui.log-out" class="text-lg mr-2" />
                     Logout
                 </button>
             </tui-opt-group>

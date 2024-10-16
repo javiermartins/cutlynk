@@ -1,0 +1,19 @@
+.short-link-container {
+    display: flex;
+    align-items: center;
+}
+
+tui-svg {
+    margin-left: 10px;
+}
+
+form {
+    display: grid;
+    grid-gap: 16px;
+}
+
+.label-text {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 2px
+}

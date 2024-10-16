@@ -2,3 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.no-shadow-input {
+
+    [tuiWrapper],
+    [tuiWrapper]:hover:not(._no-hover) {
+        box-shadow: none;
+    }
+}

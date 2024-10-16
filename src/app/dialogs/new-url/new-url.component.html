@@ -1,0 +1,48 @@
+<form [formGroup]="urlForm">
+    <div>
+        <label tuiLabel>
+            <span class="label-text">URL</span>
+            <tui-input formControlName="originalUrl" class="w-full no-shadow-input" tuiTextfieldSize="m"
+                [tuiTextfieldLabelOutside]="true" placeholder="https://example.com">
+                https://
+                <input tuiTextfieldLegacy />
+            </tui-input>
+        </label>
+    </div>
+
+    <div>
+        <label tuiLabel>
+            <span class="label-text">Short url</span>
+            <div class="short-link-container">
+                <tui-input formControlName="shortUrl" class="w-full no-shadow-input" tuiTextfieldSize="m"
+                    [tuiTextfieldLabelOutside]="true">
+                    <input tuiTextfieldLegacy />
+                </tui-input>
+                <button appearance="whiteblock" tuiButton type="button" size="m" class="mx-2 !px-5"
+                    (click)="base62Encode()">
+                    <tui-icon icon="@tui.shuffle" class="text-lg mr-2" />
+                </button>
+            </div>
+        </label>
+    </div>
+
+    <div>
+        <label tuiLabel>
+            <span class="label-text">Description</span>
+            <div class="short-link-container">
+                <tui-textarea formControlName="description" class="w-full no-shadow-input" [maxLength]="400">
+                </tui-textarea>
+            </div>
+        </label>
+    </div>
+
+    <div class="mt-4 ml-auto">
+        <button appearance="whiteblock" tuiButton type="button" size="m" class="mr-2" (click)="cancel()">
+            Cancel
+        </button>
+        <button appearance="whiteblock" tuiButton type="button" size="m" [disabled]="urlForm.invalid || saving"
+            (click)="createShortenedUrl()">
+            Save
+        </button>
+    </div>
+</form>
