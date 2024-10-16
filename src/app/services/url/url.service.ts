@@ -20,6 +20,10 @@ export class UrlService {
     return await this.apiService.getDocuments(environment.URL_COLLETION, [Query.equal('userId', userId)]);
   }
 
+  async updateUrl(idUrl: string, urlData: any) {
+    return await this.apiService.updateDocument(environment.URL_COLLETION, idUrl, urlData);
+  }
+
   async getUrlByShortUrl(shortUrl: string) {
     return await this.apiService.getDocuments(environment.URL_COLLETION, [Query.equal('shortUrl', shortUrl)]);
   }

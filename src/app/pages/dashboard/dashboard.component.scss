@@ -2,3 +2,11 @@
     width: 100%;
     border: 1px solid rgb(229 229 229);
 }
+
+.clicks-container {
+    margin-left: auto;
+    color: var(--tui-text-secondary);
+    padding: 5px 8px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 1px var(--tui-border-normal);
+}

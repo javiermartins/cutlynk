@@ -2,13 +2,14 @@ import { Component, inject, INJECTOR, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { UrlService } from '../../services/url/url.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TuiInputModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { TuiButton, TuiDialogOptions, TuiDialogService, TuiIcon, TuiSurface, TuiTitle } from '@taiga-ui/core';
 import { TuiCardMedium, TuiHeader } from '@taiga-ui/layout';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { NewUrlComponent } from '../../dialogs/new-url/new-url.component';
+import { UrlDetailComponent } from '../../dialogs/url-detail/url-detail.component';
 import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
+import { Url } from '../../models/url.model';
 
 @Component({
     selector: 'app-dashboard',
@@ -51,7 +52,17 @@ export class DashboardComponent implements OnInit {
         });
     }
 
+    async incrementClicks(url: Url) {
+        url.clicks += 1;
+        const data = { clicks: url.clicks };
+        await this.urlService.updateUrl(url.$id, data).then()
+            .catch((error: Error) => {
+                console.error(error);
+            });
+    }
+
     deleteUrl(url: any) {
+        //TODO: confirm dialog
         this.urlService.deleteUrl(url.$id).then(() => {
             this.getUserUrls();
         });
@@ -61,17 +72,18 @@ export class DashboardComponent implements OnInit {
         this.clipboard.copy(`http://localhost:4200/${url.shortUrl}`);
     }
 
-    openNewUrl() {
+    openUrlDetail(url?: Url) {
         const dialogOptions: Partial<TuiDialogOptions<any>> = {
             closeable: false,
             dismissible: true,
             data: {
-                user: this.user
+                user: this.user,
+                url: url
             }
         }
 
         this.dialogs
-            .open(new PolymorpheusComponent(NewUrlComponent, this.injector), dialogOptions)
+            .open(new PolymorpheusComponent(UrlDetailComponent, this.injector), dialogOptions)
             .subscribe({
                 next: async (value: any) => {
                     if (value) {

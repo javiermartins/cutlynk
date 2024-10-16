@@ -1,7 +1,7 @@
 <div>
     <div class="flex mx-16 my-12">
-        <button appearance="whiteblock" tuiButton type="button" size="m" (click)="openNewUrl()">
-            Add link
+        <button appearance="whiteblock" tuiButton type="button" size="m" (click)="openUrlDetail()">
+            <tui-icon icon="@tui.plus" /> Add link
         </button>
     </div>
 
@@ -10,25 +10,29 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
                 @for (url of urls; track url.id) {
                 <div tuiCardMedium tuiSurface class="url-card shadow-sm">
-                    <header>
+                    <header class="max-w-full">
                         <h2 tuiTitle>
-                            <a [href]="url.originalUrl" target="_blank">{{url.shortUrl}}</a>
-                            <span tuiSubtitle>{{url.originalUrl}}</span>
+                            <a [href]="url.originalUrl" target="_blank" (click)="incrementClicks(url)"
+                                class="truncate">{{url.shortUrl}}</a>
+                            <span tuiSubtitle class="truncate">{{url.originalUrl}}</span>
                         </h2>
                     </header>
-                    <footer>
+                    <footer class="flex items-center w-full">
                         <button appearance="whiteblock" iconStart="@tui.copy" size="s" tuiIconButton type="button"
                             class="mr-1" (click)="copyUrlToClipboard(url)">
                             Copy
                         </button>
                         <button appearance="whiteblock" iconStart="@tui.pencil" size="s" tuiIconButton type="button"
-                            class="mr-1" disabled>
+                            class="mr-1" (click)="openUrlDetail(url)">
                             Edit
                         </button>
                         <button appearance="whiteblock" iconStart="@tui.trash" size="s" tuiIconButton type="button"
                             (click)="deleteUrl(url)">
                             Delete
                         </button>
+                        <div class="clicks-container">
+                            {{url.clicks}} clicks
+                        </div>
                     </footer>
                 </div>
                 } @empty {

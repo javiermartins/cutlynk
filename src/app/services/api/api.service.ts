@@ -41,6 +41,16 @@ export class ApiService {
     );
   }
 
+  async updateDocument(collectionId: string, documentId: string, data: any, permissions?: any[]) {
+    await this.databases.updateDocument(
+      environment.DATABASE_ID,
+      collectionId,
+      documentId,
+      data,
+      permissions
+    );
+  }
+
   async deleteDocument(collectionId: string, documentId: string) {
     return await this.databases.deleteDocument(
       environment.DATABASE_ID,

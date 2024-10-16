@@ -1,8 +1,8 @@
 export interface Url {
-    id$: string;
+    $id?: string;
     originalUrl: string;
     shortUrl: string;
-    clicks: string;
+    clicks?: string;
     userId: string;
     description?: string;
 }

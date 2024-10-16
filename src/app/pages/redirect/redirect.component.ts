@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UrlService } from '../../services/url/url.service';
+import { Url } from '../../models/url.model';
 
 @Component({
   selector: 'app-redirect',
@@ -28,14 +29,24 @@ export class RedirectComponent {
   }
 
   getUrlByShortUrl() {
-    this.urlService.getUrlByShortUrl(this.shortUrl).then((response) => {
+    this.urlService.getUrlByShortUrl(this.shortUrl).then(async (response) => {
       const urlData: any = response.documents[0];
       if (urlData && urlData.originalUrl) {
+        await this.incrementClicks(urlData);
         window.location.href = urlData.originalUrl;
       } else {
         //TODO: redirect to error
       }
     });
+  }
+
+  async incrementClicks(url: Url) {
+    url.clicks += 1;
+    const data = { clicks: url.clicks };
+    await this.urlService.updateUrl(url.$id, data).then()
+      .catch((error: Error) => {
+        console.error(error);
+      });
   }
 
 }

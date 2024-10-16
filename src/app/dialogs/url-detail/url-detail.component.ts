@@ -6,45 +6,65 @@ import { injectContext } from '@taiga-ui/polymorpheus';
 import { UrlService } from '../../services/url/url.service';
 import { Constants } from '../../utils/constants';
 import { Error } from '../../models/error.model';
+import { Url } from '../../models/url.model';
+import { User } from '../../models/user.model';
 
 export class Props {
-  user: any;
+  user: User;
+  url: Url
 }
 
 @Component({
-  selector: 'app-new-url',
+  selector: 'app-url-detail',
   standalone: true,
   imports: [
     ReactiveFormsModule, TuiButton, TuiInputModule, TuiLabel, TuiTextfieldControllerModule,
     TuiTextfield, TuiTextareaModule, TuiIcon
   ],
-  templateUrl: './new-url.component.html',
-  styleUrl: './new-url.component.scss'
+  templateUrl: './url-detail.component.html',
+  styleUrl: './url-detail.component.scss'
 })
-export class NewUrlComponent {
+export class UrlDetailComponent {
   protected readonly context =
     injectContext<TuiDialogContext<boolean, Props>>();
 
-  public urlPattern: string = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+  private originalUrlPattern: string = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([\\/\\w.-]*)*\\/?';
+  private shortUrlPattern: string = '^[a-zA-Z0-9-]+$';
   public saving: boolean = false;
+  public urlData = this.context.data.url;
   public urlForm = new FormGroup({
-    originalUrl: new FormControl('', [Validators.required, Validators.pattern(this.urlPattern)]),
-    shortUrl: new FormControl('', [Validators.required]),
-    description: new FormControl('')
+    originalUrl: new FormControl(this.urlData ? this.urlData.originalUrl : '', [Validators.required, Validators.pattern(this.originalUrlPattern)]),
+    shortUrl: new FormControl(this.urlData ? this.urlData.shortUrl : '', [Validators.required, Validators.pattern(this.shortUrlPattern)]),
+    description: new FormControl(this.urlData ? this.urlData.description : '')
   });
 
   constructor(
     private urlService: UrlService
   ) { }
 
+  save() {
+    if (this.urlData) {
+      this.updateUrl();
+    } else {
+      this.createShortenedUrl();
+    }
+  }
+
+  async updateUrl() {
+    const data = this.getUrlData();
+
+    await this.urlService.updateUrl(this.urlData.$id, data).then(() => {
+      this.urlForm.controls['originalUrl'].setValue('');
+      this.context.completeWith(true);
+    }).catch((error: Error) => {
+      if (error.type == Constants.ERRORS.DOCUMENT_EXISTS) {
+        console.log('Document with the requested ID already exists');
+      }
+    });
+  }
 
   async createShortenedUrl() {
-    const data = {
-      originalUrl: this.urlForm.controls['originalUrl'].value,
-      shortUrl: this.urlForm.controls['shortUrl'].value,
-      userId: this.context.data.user.$id,
-      description: this.urlForm.controls['description'].value
-    }
+    const data = this.getUrlData();
 
     await this.urlService.createShortenedUrl(data).then(() => {
       this.urlForm.controls['originalUrl'].setValue('');
@@ -54,6 +74,15 @@ export class NewUrlComponent {
         console.log('Document with the requested ID already exists');
       }
     });
+  }
+
+  getUrlData() {
+    return {
+      originalUrl: this.urlForm.controls['originalUrl'].value,
+      shortUrl: this.urlForm.controls['shortUrl'].value,
+      userId: this.context.data.user.$id,
+      description: this.urlForm.controls['description'].value
+    }
   }
 
   base62Encode() {

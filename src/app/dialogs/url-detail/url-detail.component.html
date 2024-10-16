@@ -18,10 +18,12 @@
                     [tuiTextfieldLabelOutside]="true">
                     <input tuiTextfieldLegacy />
                 </tui-input>
+                @if(!urlData) {
                 <button appearance="whiteblock" tuiButton type="button" size="m" class="mx-2 !px-5"
                     (click)="base62Encode()">
                     <tui-icon icon="@tui.shuffle" class="text-lg mr-2" />
                 </button>
+                }
             </div>
         </label>
     </div>
@@ -40,8 +42,8 @@
         <button appearance="whiteblock" tuiButton type="button" size="m" class="mr-2" (click)="cancel()">
             Cancel
         </button>
-        <button appearance="whiteblock" tuiButton type="button" size="m" [disabled]="urlForm.invalid || saving"
-            (click)="createShortenedUrl()">
+        <button appearance="whiteblock" tuiButton type="button" size="m"
+            [disabled]="urlForm.invalid || !this.urlForm.dirty || saving" (click)="save()">
             Save
         </button>
     </div>
