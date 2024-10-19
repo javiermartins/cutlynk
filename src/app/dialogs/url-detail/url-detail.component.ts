@@ -8,6 +8,7 @@ import { Constants } from '../../utils/constants';
 import { Error } from '../../models/error.model';
 import { Url } from '../../models/url.model';
 import { User } from '../../models/user.model';
+import { toast, NgxSonnerToaster } from 'ngx-sonner';
 
 export class Props {
   user: User;
@@ -19,7 +20,7 @@ export class Props {
   standalone: true,
   imports: [
     ReactiveFormsModule, TuiButton, TuiInputModule, TuiLabel, TuiTextfieldControllerModule,
-    TuiTextfield, TuiTextareaModule, TuiIcon
+    TuiTextfield, TuiTextareaModule, TuiIcon, NgxSonnerToaster
   ],
   templateUrl: './url-detail.component.html',
   styleUrl: './url-detail.component.scss'
@@ -27,6 +28,7 @@ export class Props {
 export class UrlDetailComponent {
   protected readonly context =
     injectContext<TuiDialogContext<boolean, Props>>();
+  protected readonly toast = toast;
 
   private originalUrlPattern: string = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([\\/\\w.-]*)*\\/?';
   private shortUrlPattern: string = '^[a-zA-Z0-9-]+$';
@@ -57,9 +59,7 @@ export class UrlDetailComponent {
       this.urlForm.controls['originalUrl'].setValue('');
       this.context.completeWith(true);
     }).catch((error: Error) => {
-      if (error.type == Constants.ERRORS.DOCUMENT_EXISTS) {
-        console.log('Document with the requested ID already exists');
-      }
+      this.duplicateShortUrlNotification(error);
     });
   }
 
@@ -70,10 +70,15 @@ export class UrlDetailComponent {
       this.urlForm.controls['originalUrl'].setValue('');
       this.context.completeWith(true);
     }).catch((error: Error) => {
-      if (error.type == Constants.ERRORS.DOCUMENT_EXISTS) {
-        console.log('Document with the requested ID already exists');
-      }
+      this.duplicateShortUrlNotification(error);
     });
+  }
+
+  duplicateShortUrlNotification(error: Error) {
+    if (error.type == Constants.ERRORS.DOCUMENT_EXISTS) {
+      toast.warning('This short URL already exists. Please try another one.');
+      this.urlForm.controls['shortUrl'].setErrors({ 'incorrect': true });
+    }
   }
 
   getUrlData() {

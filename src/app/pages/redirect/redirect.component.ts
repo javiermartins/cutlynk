@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UrlService } from '../../services/url/url.service';
 import { Url } from '../../models/url.model';
 
@@ -16,7 +16,8 @@ export class RedirectComponent {
 
   constructor(
     private urlService: UrlService,
-    private route: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
     this.getshortUrl();
   }
@@ -35,7 +36,7 @@ export class RedirectComponent {
         await this.incrementClicks(urlData);
         window.location.href = urlData.originalUrl;
       } else {
-        //TODO: redirect to error
+        this.router.navigate(['/error']);
       }
     });
   }

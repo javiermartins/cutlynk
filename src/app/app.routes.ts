@@ -6,9 +6,11 @@ import { authGuard } from './guards/auth/auth.guard';
 import { loginGuard } from './guards/login/login.guard';
 import { LayoutComponent } from './components/layout/layout.component';
 import { RedirectComponent } from './pages/redirect/redirect.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '', pathMatch: 'full' },
+    { path: '', component: LandingPageComponent },
     { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
     { path: 'error', component: ErrorComponent },
     {

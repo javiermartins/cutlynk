@@ -18,16 +18,20 @@
                         </h2>
                     </header>
                     <footer class="flex items-center w-full">
-                        <button appearance="whiteblock" iconStart="@tui.copy" size="s" tuiIconButton type="button"
-                            class="mr-1" (click)="copyUrlToClipboard(url)">
-                            Copy
+                        <button appearance="whiteblock" size="s" tuiIconButton type="button" class="mr-1"
+                            (click)="copyUrlToClipboard(url, $index)">
+                            @if(activeIndex !== $index) {
+                            <tui-icon icon="@tui.copy" [style.color]="'var(--tui-text-tertiary)'" />
+                            } @else {
+                            <tui-icon icon="@tui.check" class="text-[#008a2e99]" />
+                            }
                         </button>
                         <button appearance="whiteblock" iconStart="@tui.pencil" size="s" tuiIconButton type="button"
                             class="mr-1" (click)="openUrlDetail(url)">
                             Edit
                         </button>
                         <button appearance="whiteblock" iconStart="@tui.trash" size="s" tuiIconButton type="button"
-                            (click)="deleteUrl(url)">
+                            (click)="openDeleteUrl(url)">
                             Delete
                         </button>
                         <div class="clicks-container">
@@ -42,3 +46,5 @@
         </div>
     </div>
 </div>
+
+<ngx-sonner-toaster />

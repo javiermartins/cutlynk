@@ -14,12 +14,11 @@ export class AuthService {
   ) { }
 
   async isAuthenticated() {
-    try {
-      await this.getUser();
+    return await this.getUser().then(() => {
       return true;
-    } catch (error) {
+    }).catch(() => {
       return false;
-    }
+    });
   }
 
   async getUser() {

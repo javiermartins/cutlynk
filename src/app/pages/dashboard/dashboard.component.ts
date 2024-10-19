@@ -10,12 +10,14 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { UrlDetailComponent } from '../../dialogs/url-detail/url-detail.component';
 import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
 import { Url } from '../../models/url.model';
+import { ConfirmDeleteComponent } from '../../dialogs/confirm-delete/confirm-delete.component';
+import { toast, NgxSonnerToaster } from 'ngx-sonner';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
     imports: [RouterLink, ReactiveFormsModule, TuiButton, TuiInputModule, TuiTextfieldControllerModule,
-        TuiCardMedium, TuiTitle, TuiHeader, TuiSurface, TuiIcon
+        TuiCardMedium, TuiTitle, TuiHeader, TuiSurface, TuiIcon, NgxSonnerToaster
     ],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss'
@@ -23,9 +25,11 @@ import { Url } from '../../models/url.model';
 export class DashboardComponent implements OnInit {
     private readonly dialogs = inject(TuiDialogService);
     private readonly injector = inject(INJECTOR);
+    protected readonly toast = toast;
 
     public urls: any;
     private user: any;
+    public activeIndex: number | null = null;
 
     constructor(
         private authService: AuthService,
@@ -61,15 +65,33 @@ export class DashboardComponent implements OnInit {
             });
     }
 
-    deleteUrl(url: any) {
-        //TODO: confirm dialog
-        this.urlService.deleteUrl(url.$id).then(() => {
-            this.getUserUrls();
-        });
+    openDeleteUrl(url?: Url) {
+        const dialogOptions: Partial<TuiDialogOptions<any>> = {
+            closeable: false,
+            dismissible: true,
+            data: {
+                url: url
+            }
+        }
+
+        this.dialogs
+            .open(new PolymorpheusComponent(ConfirmDeleteComponent, this.injector), dialogOptions)
+            .subscribe({
+                next: async (value: any) => {
+                    if (value) {
+                        this.urls = this.urls.filter((u: Url) => u.$id !== url.$id);
+                    }
+                },
+            });
     }
 
-    copyUrlToClipboard(url: any) {
+    copyUrlToClipboard(url: any, index: number) {
         this.clipboard.copy(`http://localhost:4200/${url.shortUrl}`);
+        this.activeIndex = index;
+        setTimeout(() => {
+            this.activeIndex = null;
+        }, 2000);
+        toast('Url copied to clipboard', { duration: 2000 });
     }
 
     openUrlDetail(url?: Url) {

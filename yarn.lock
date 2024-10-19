@@ -267,7 +267,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^17.0.0", "@angular/common@^17.0.0 || ^18.0.0", "@angular/common@^17.3.10", "@angular/common@>=16.0.0", "@angular/common@17.3.12":
+"@angular/common@^17.0.0", "@angular/common@^17.0.0 || ^18.0.0", "@angular/common@^17.3.10", "@angular/common@>=16.0.0", "@angular/common@>=17.3.0", "@angular/common@17.3.12":
   version "17.3.12"
   resolved "https://registry.npmjs.org/@angular/common/-/common-17.3.12.tgz"
   integrity sha512-vabJzvrx76XXFrm1RJZ6o/CyG32piTB/1sfFfKHdlH1QrmArb8It4gyk9oEjZ1IkAD0HvBWlfWmn+T6Vx3pdUw==
@@ -295,7 +295,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^17.0.0", "@angular/core@^17.0.0 || ^18.0.0", "@angular/core@^17.3.10", "@angular/core@>=16.0.0", "@angular/core@17.3.12":
+"@angular/core@^17.0.0", "@angular/core@^17.0.0 || ^18.0.0", "@angular/core@^17.3.10", "@angular/core@>=16.0.0", "@angular/core@>=17.3.0", "@angular/core@17.3.12":
   version "17.3.12"
   resolved "https://registry.npmjs.org/@angular/core/-/core-17.3.12.tgz"
   integrity sha512-MuFt5yKi161JmauUta4Dh0m8ofwoq6Ino+KoOtkYMBGsSx+A7dSm+DUxxNwdj7+DNyg3LjVGCFgBFnq4g8z06A==
@@ -5218,6 +5218,13 @@ ng-morph@^4.8.4:
     minimatch "10.0.1"
     multimatch "5.0.0"
     ts-morph "23.0.0"
+
+ngx-sonner@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/ngx-sonner/-/ngx-sonner-1.0.0.tgz"
+  integrity sha512-eymqTMVGrQAm0R9b+/koA+cymyTmE86q0giZI611apEwH3MDdIB6wEDwqc4DPSQ+AQJlgBz4vJxTFCOY+lXCzQ==
+  dependencies:
+    tslib "^2.3.0"
 
 node-fetch@2.6.7:
   version "2.6.7"

@@ -1,11 +1,11 @@
 <tui-root>
-@if(!loading) {
-<div>
-    <router-outlet></router-outlet>
-</div>
-} @else {
-<div class="flex justify-center items-center h-screen text-xl font-medium">
-    Loading...
-</div>
-}
+    @if(!loading) {
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+    } @else {
+    <div class="flex justify-center items-center h-screen text-xl font-medium">
+        Loading...
+    </div>
+    }
 </tui-root>
