@@ -9,6 +9,7 @@ import { Error } from '../../models/error.model';
 import { Url } from '../../models/url.model';
 import { User } from '../../models/user.model';
 import { toast, NgxSonnerToaster } from 'ngx-sonner';
+import { TuiAutoFocus } from '@taiga-ui/cdk';
 
 export class Props {
   user: User;
@@ -20,7 +21,7 @@ export class Props {
   standalone: true,
   imports: [
     ReactiveFormsModule, TuiButton, TuiInputModule, TuiLabel, TuiTextfieldControllerModule,
-    TuiTextfield, TuiTextareaModule, TuiIcon, NgxSonnerToaster
+    TuiTextfield, TuiTextareaModule, TuiIcon, NgxSonnerToaster, TuiAutoFocus
   ],
   templateUrl: './url-detail.component.html',
   styleUrl: './url-detail.component.scss'
@@ -30,7 +31,7 @@ export class UrlDetailComponent {
     injectContext<TuiDialogContext<boolean, Props>>();
   protected readonly toast = toast;
 
-  private originalUrlPattern: string = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([\\/\\w.-]*)*\\/?';
+  private originalUrlPattern: string = '^(https?:\/\/)?([\\da-z.-]+)\\.[a-z.]{2,6}(\/[\\/\\w.-]*)*(\\?[\\w=&.-]+)?$';
   private shortUrlPattern: string = '^[a-zA-Z0-9-]+$';
   public saving: boolean = false;
   public urlData = this.context.data.url;

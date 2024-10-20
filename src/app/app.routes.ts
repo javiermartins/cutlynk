@@ -7,9 +7,9 @@ import { loginGuard } from './guards/login/login.guard';
 import { LayoutComponent } from './components/layout/layout.component';
 import { RedirectComponent } from './pages/redirect/redirect.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '', pathMatch: 'full' },
     { path: '', component: LandingPageComponent },
     { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
     { path: 'error', component: ErrorComponent },
@@ -18,8 +18,8 @@ export const routes: Routes = [
         component: LayoutComponent,
         canActivate: [authGuard],
         children: [
-            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-            { path: 'dashboard', component: DashboardComponent }
+            { path: 'dashboard', component: DashboardComponent },
+            { path: 'settings', component: SettingsComponent }
         ],
     },
     { path: ':shortUrl', component: RedirectComponent },

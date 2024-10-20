@@ -3,7 +3,8 @@
         <label tuiLabel>
             <span class="label-text">URL</span>
             <tui-input formControlName="originalUrl" class="w-full no-shadow-input" tuiTextfieldSize="m"
-                [tuiTextfieldLabelOutside]="true" placeholder="https://example.com">
+                [tuiTextfieldLabelOutside]="true" placeholder="https://example.com"
+                [tuiAutoFocus]="urlData ? false : true">
                 https://
                 <input tuiTextfieldLegacy />
             </tui-input>

@@ -3,12 +3,13 @@ import { TuiAppearance, TuiButton, TuiDataList, TuiDropdown, TuiIcon } from '@ta
 import { TuiAvatar } from '@taiga-ui/kit';
 import { TuiHeader, TuiNavigation } from '@taiga-ui/layout';
 import { AuthService } from '../../services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
+    RouterLink,
     TuiAppearance,
     TuiAvatar,
     TuiButton,

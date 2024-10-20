@@ -1,6 +1,6 @@
 <header tuiNavigationHeader class="!py-7">
     <span tuiNavigationLogo>
-        <span tuiFade class="text-lg">Cutlynk</span>
+        <a tuiFade class="text-lg" [routerLink]="['dashboard']">Cutlynk</a>
     </span>
     <hr />
     <button [style.border-radius.%]="100" [tuiDropdown]="content" [(tuiDropdownOpen)]="openMenu">
@@ -9,6 +9,10 @@
     <ng-template #content>
         <tui-data-list>
             <tui-opt-group>
+                <button tuiOption type="button" [routerLink]="['settings']">
+                    <tui-icon icon="@tui.settings" class="text-lg mr-2" />
+                    Settings
+                </button>
                 <button tuiOption type="button" (click)="logout()">
                     <tui-icon icon="@tui.log-out" class="text-lg mr-2" />
                     Logout

@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { UrlService } from '../../services/url/url.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TuiInputModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
-import { TuiButton, TuiDialogOptions, TuiDialogService, TuiIcon, TuiSurface, TuiTitle } from '@taiga-ui/core';
+import { TuiButton, TuiDialogOptions, TuiDialogService, TuiIcon, TuiLoader, tuiLoaderOptionsProvider, TuiSurface, TuiTitle } from '@taiga-ui/core';
 import { TuiCardMedium, TuiHeader } from '@taiga-ui/layout';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { UrlDetailComponent } from '../../dialogs/url-detail/url-detail.component';
@@ -12,24 +12,29 @@ import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
 import { Url } from '../../models/url.model';
 import { ConfirmDeleteComponent } from '../../dialogs/confirm-delete/confirm-delete.component';
 import { toast, NgxSonnerToaster } from 'ngx-sonner';
+import { CommonModule } from '@angular/common';
+import { User } from '../../models/user.model';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [RouterLink, ReactiveFormsModule, TuiButton, TuiInputModule, TuiTextfieldControllerModule,
-        TuiCardMedium, TuiTitle, TuiHeader, TuiSurface, TuiIcon, NgxSonnerToaster
+    imports: [CommonModule, RouterLink, ReactiveFormsModule, TuiButton, TuiInputModule, TuiTextfieldControllerModule,
+        TuiCardMedium, TuiTitle, TuiHeader, TuiSurface, TuiIcon, NgxSonnerToaster, TuiLoader
     ],
     templateUrl: './dashboard.component.html',
-    styleUrl: './dashboard.component.scss'
+    styleUrl: './dashboard.component.scss',
+    providers: [tuiLoaderOptionsProvider({ size: 'l' })]
 })
 export class DashboardComponent implements OnInit {
     private readonly dialogs = inject(TuiDialogService);
     private readonly injector = inject(INJECTOR);
     protected readonly toast = toast;
 
-    public urls: any;
-    private user: any;
+    public urls: any[];
+    private user: User;
+    public loading: boolean = true;
     public activeIndex: number | null = null;
+    public removingIndex: number | null = null;
 
     constructor(
         private authService: AuthService,
@@ -53,6 +58,8 @@ export class DashboardComponent implements OnInit {
     async getUserUrls() {
         this.urlService.getUserUrls(this.user.$id).then((urls) => {
             this.urls = urls.documents;
+        }).finally(() => {
+            this.loading = false;
         });
     }
 
@@ -65,7 +72,7 @@ export class DashboardComponent implements OnInit {
             });
     }
 
-    openDeleteUrl(url?: Url) {
+    openDeleteUrl(url: Url, index: number) {
         const dialogOptions: Partial<TuiDialogOptions<any>> = {
             closeable: false,
             dismissible: true,
@@ -79,7 +86,11 @@ export class DashboardComponent implements OnInit {
             .subscribe({
                 next: async (value: any) => {
                     if (value) {
-                        this.urls = this.urls.filter((u: Url) => u.$id !== url.$id);
+                        this.removingIndex = index;
+                        setTimeout(() => {
+                            this.urls.splice(index, 1);
+                            this.removingIndex = null;
+                        }, 400);
                     }
                 },
             });

@@ -7,9 +7,12 @@
 
     <div>
         <div class="container mx-auto px-4">
+
+            @if (!loading) {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
                 @for (url of urls; track url.id) {
-                <div tuiCardMedium tuiSurface class="url-card shadow-sm">
+                <div tuiCardMedium tuiSurface class="url-card shadow-sm transition-all duration-600"
+                    [ngClass]="{'animate-fade-out': removingIndex === $index}">
                     <header class="max-w-full">
                         <h2 tuiTitle>
                             <a [href]="url.originalUrl" target="_blank" (click)="incrementClicks(url)"
@@ -31,7 +34,7 @@
                             Edit
                         </button>
                         <button appearance="whiteblock" iconStart="@tui.trash" size="s" tuiIconButton type="button"
-                            (click)="openDeleteUrl(url)">
+                            (click)="openDeleteUrl(url, $index)">
                             Delete
                         </button>
                         <div class="clicks-container">
@@ -43,6 +46,9 @@
                 Empty list of urls
                 }
             </div>
+            } @else {
+            <tui-loader class="loader" [inheritColor]="true" [overlay]="true" [showLoader]="true"></tui-loader>
+            }
         </div>
     </div>
 </div>
