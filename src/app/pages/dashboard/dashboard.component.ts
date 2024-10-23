@@ -2,7 +2,7 @@ import { Component, inject, INJECTOR, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { UrlService } from '../../services/url/url.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiInputModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { TuiButton, TuiDialogOptions, TuiDialogService, TuiIcon, TuiLoader, tuiLoaderOptionsProvider, TuiSurface, TuiTitle } from '@taiga-ui/core';
 import { TuiCardMedium, TuiHeader } from '@taiga-ui/layout';
@@ -14,12 +14,14 @@ import { ConfirmDeleteComponent } from '../../dialogs/confirm-delete/confirm-del
 import { toast, NgxSonnerToaster } from 'ngx-sonner';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SearchPipe } from '../../utils/pipes/search.pipe';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [CommonModule, RouterLink, ReactiveFormsModule, TuiButton, TuiInputModule, TuiTextfieldControllerModule,
-        TuiCardMedium, TuiTitle, TuiHeader, TuiSurface, TuiIcon, NgxSonnerToaster, TuiLoader, TranslateModule
+    imports: [
+        CommonModule, FormsModule, RouterLink, ReactiveFormsModule, TuiButton, TuiInputModule, TuiTextfieldControllerModule,
+        TuiCardMedium, TuiTitle, TuiHeader, TuiSurface, TuiIcon, NgxSonnerToaster, TuiLoader, TranslateModule, SearchPipe
     ],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
@@ -35,6 +37,7 @@ export class DashboardComponent implements OnInit {
     public loading: boolean = true;
     public activeIndex: number | null = null;
     public removingIndex: number | null = null;
+    public searchUrl: string = '';
 
     constructor(
         private authService: AuthService,

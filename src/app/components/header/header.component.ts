@@ -36,4 +36,8 @@ export class HeaderComponent {
     await this.authService.logout().then(() => this.router.navigate(['/login']));
   }
 
+  closeMenu() {
+    this.openMenu = false;
+  }
+
 }

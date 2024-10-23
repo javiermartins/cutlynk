@@ -1,16 +1,22 @@
 <div>
-    <div class="flex mx-16 my-12">
-        <button appearance="whiteblock" tuiButton type="button" size="m" (click)="openUrlDetail()">
-            <tui-icon icon="@tui.plus" /> {{ 'DASHBOARD.ADDURL' | translate }}
-        </button>
+    <div class="container px-4 grid grid-cols-1 sm:grid-cols-2 mx-auto my-12">
+        <tui-input [(ngModel)]="searchUrl" class="no-shadow-input w-full" tuiTextfieldSize="m"
+            tuiTextfieldIconLeft="@tui.search" [tuiTextfieldLabelOutside]="true">
+            {{ 'DASHBOARD.SEARCHURLS' | translate }}
+            <input tuiTextfieldLegacy />
+        </tui-input>
+        <div class="flex mt-8 sm:justify-end sm:mt-0">
+            <button appearance="whiteblock" tuiButton type="button" size="m" (click)="openUrlDetail()">
+                <tui-icon icon="@tui.plus" /> {{ 'DASHBOARD.ADDURL' | translate }}
+            </button>
+        </div>
     </div>
 
     <div>
         <div class="container mx-auto px-4">
-
             @if (!loading) {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-                @for (url of urls; track url.id) {
+                @for (url of (urls | filter: searchUrl); track url.id) {
                 <div tuiCardMedium tuiSurface class="url-card shadow-sm transition-all duration-600"
                     [ngClass]="{'animate-fade-out': removingIndex === $index}">
                     <header class="max-w-full">

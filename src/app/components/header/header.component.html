@@ -9,7 +9,8 @@
     <ng-template #content>
         <tui-data-list>
             <tui-opt-group>
-                <button tuiOption type="button" class="!justify-start" [routerLink]="['settings']">
+                <button tuiOption type="button" class="!justify-start" (click)="closeMenu()"
+                    [routerLink]="['settings']">
                     <tui-icon icon="@tui.settings" class="text-lg mr-2" />
                     {{ 'COMMON.SETTINGS' | translate }}
                 </button>
