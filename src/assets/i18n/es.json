@@ -1,0 +1,29 @@
+{
+    "COMMON": {
+        "CANCEL": "Cancelar",
+        "DELETE": "Eliminar",
+        "LOGOUT": "Cerrar sesión",
+        "SAVE": "Guardar",
+        "SETTINGS": "Ajustes",
+        "SINGINGOOGLE": "Iniciar sesión con Google"
+    },
+    "DASHBOARD": {
+        "ADDURL": "Añadir url",
+        "CLICKS": "clicks",
+        "CONFIRMDELETETITLE": "¿Eliminar esta url?",
+        "CONFIRMDELETEDESCRIPTION": "Esta acción no se puede deshacer y la URL se eliminará permanentemente de tu lista.",
+        "COPIEDCLIPBOARD": "Url copiada al portapapeles",
+        "DESCRIPTION": "Descripción",
+        "SHORTURL": "Url corta",
+        "URL": "URL"
+    },
+    "SETTINGS": {
+        "EMAIL": "Email",
+        "LANGUAGE": "Idioma",
+        "NAME": "Nombre"
+    },
+    "LANGUAGES": {
+        "ENGLISH": "Inglés",
+        "SPANISH": "Español"
+    }
+}

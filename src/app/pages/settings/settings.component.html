@@ -3,7 +3,7 @@
     <form [formGroup]="urlForm" class="card-container">
         <div>
             <label tuiLabel>
-                <span class="label-text">Name</span>
+                <span class="label-text">{{ 'SETTINGS.NAME' | translate }}</span>
                 <tui-input formControlName="userName" class="w-full no-shadow-input" tuiTextfieldSize="m"
                     [tuiTextfieldLabelOutside]="true">
                     <input tuiTextfieldLegacy />
@@ -13,12 +13,34 @@
 
         <div class="mt-4">
             <label tuiLabel>
-                <span class="label-text">Email</span>
+                <span class="label-text">{{ 'SETTINGS.EMAIL' | translate }}</span>
                 <tui-input formControlName="email" class="w-full no-shadow-input" tuiTextfieldSize="m"
                     [tuiTextfieldLabelOutside]="true">
                     <input tuiTextfieldLegacy />
                 </tui-input>
             </label>
+        </div>
+
+        <div class="mt-4">
+            <label tuiLabel>
+                <span class="label-text">{{ 'SETTINGS.LANGUAGE' | translate }}</span>
+                <tui-select formControlName="language" class="w-full no-shadow-input" tuiTextfieldSize="m"
+                    [tuiTextfieldLabelOutside]="true" [valueContent]="value">
+                    <ng-template tuiDataList>
+                        <tui-data-list>
+                            <button *ngFor="let language of languages" tuiOption type="button" [value]="language"
+                                (click)="changeLanguage(language.id)">
+                                <img [src]="'assets/img/flags/'+language.id+'.webp'" alt="Flag image" width="28px" />
+                                <span class="ml-2">{{language.value | translate}}</span>
+                            </button>
+                        </tui-data-list>
+                    </ng-template>
+                </tui-select>
+            </label>
+            <ng-template #value let-language>
+                <img [src]="'assets/img/flags/'+language.id+'.webp'" alt="Flag image" width="20px" />
+                <span class="ml-2">{{language.value | translate}}</span>
+            </ng-template>
         </div>
     </form>
 </div>

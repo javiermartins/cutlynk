@@ -1,7 +1,7 @@
 <form [formGroup]="urlForm">
     <div>
         <label tuiLabel>
-            <span class="label-text">URL</span>
+            <span class="label-text">{{ 'DASHBOARD.URL' | translate }}</span>
             <tui-input formControlName="originalUrl" class="w-full no-shadow-input" tuiTextfieldSize="m"
                 [tuiTextfieldLabelOutside]="true" placeholder="https://example.com"
                 [tuiAutoFocus]="urlData ? false : true">
@@ -13,7 +13,7 @@
 
     <div>
         <label tuiLabel>
-            <span class="label-text">Short url</span>
+            <span class="label-text">{{ 'DASHBOARD.SHORTURL' | translate }}</span>
             <div class="short-link-container">
                 <tui-input formControlName="shortUrl" class="w-full no-shadow-input" tuiTextfieldSize="m"
                     [tuiTextfieldLabelOutside]="true">
@@ -31,7 +31,7 @@
 
     <div>
         <label tuiLabel>
-            <span class="label-text">Description</span>
+            <span class="label-text">{{ 'DASHBOARD.DESCRIPTION' | translate }}</span>
             <div class="short-link-container">
                 <tui-textarea formControlName="description" class="w-full no-shadow-input" [maxLength]="400">
                 </tui-textarea>
@@ -41,11 +41,11 @@
 
     <div class="mt-4 ml-auto">
         <button appearance="whiteblock" tuiButton type="button" size="m" class="mr-2" (click)="cancel()">
-            Cancel
+            {{ 'COMMON.CANCEL' | translate }}
         </button>
         <button appearance="whiteblock" tuiButton type="button" size="m"
             [disabled]="urlForm.invalid || !this.urlForm.dirty || saving" (click)="save()">
-            Save
+            {{ 'COMMON.SAVE' | translate }}
         </button>
     </div>
 </form>

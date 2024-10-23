@@ -3,6 +3,8 @@ import { account } from '../../../lib/appwrite';
 import { Query } from 'appwrite';
 import { environment } from "../../../environments/environment";
 import { ApiService } from '../api/api.service';
+import { TranslateService } from '@ngx-translate/core';
+import languages from '../../data/languages';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,8 @@ import { ApiService } from '../api/api.service';
 export class AuthService {
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private translateService: TranslateService
   ) { }
 
   async isAuthenticated() {
@@ -22,17 +25,22 @@ export class AuthService {
   }
 
   async getUser() {
-    return await account.get();
+    const user = await account.get();
+    return await this.apiService.getDocument(environment.USERS_COLLETION, user.$id).then((user) => { return user });
   }
 
   async checkAndCreateUser() {
     const user: any = await account.get();
+    const browserLang = this.translateService.getBrowserLang();
+    const languageExist = languages.find((lang) => lang.id === browserLang)
+
     try {
       const response = await this.apiService.getDocuments(environment.USERS_COLLETION, [Query.equal('$id', user.$id)]);
       if (response.documents.length === 0) {
         const data = {
           name: user.name,
-          email: user.email
+          email: user.email,
+          language: languageExist ? languageExist.id : this.translateService.getDefaultLang()
         }
 
         await this.apiService.createDocument(environment.USERS_COLLETION, user.$id, data);

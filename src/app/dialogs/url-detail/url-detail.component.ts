@@ -10,6 +10,7 @@ import { Url } from '../../models/url.model';
 import { User } from '../../models/user.model';
 import { toast, NgxSonnerToaster } from 'ngx-sonner';
 import { TuiAutoFocus } from '@taiga-ui/cdk';
+import { TranslateModule } from '@ngx-translate/core';
 
 export class Props {
   user: User;
@@ -21,7 +22,7 @@ export class Props {
   standalone: true,
   imports: [
     ReactiveFormsModule, TuiButton, TuiInputModule, TuiLabel, TuiTextfieldControllerModule,
-    TuiTextfield, TuiTextareaModule, TuiIcon, NgxSonnerToaster, TuiAutoFocus
+    TuiTextfield, TuiTextareaModule, TuiIcon, NgxSonnerToaster, TuiAutoFocus, TranslateModule
   ],
   templateUrl: './url-detail.component.html',
   styleUrl: './url-detail.component.scss'

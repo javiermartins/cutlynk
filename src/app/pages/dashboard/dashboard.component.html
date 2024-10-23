@@ -1,7 +1,7 @@
 <div>
     <div class="flex mx-16 my-12">
         <button appearance="whiteblock" tuiButton type="button" size="m" (click)="openUrlDetail()">
-            <tui-icon icon="@tui.plus" /> Add link
+            <tui-icon icon="@tui.plus" /> {{ 'DASHBOARD.ADDURL' | translate }}
         </button>
     </div>
 
@@ -38,7 +38,7 @@
                             Delete
                         </button>
                         <div class="clicks-container">
-                            {{url.clicks}} clicks
+                            {{url.clicks}} {{ 'DASHBOARD.CLICKS' | translate }}
                         </div>
                     </footer>
                 </div>

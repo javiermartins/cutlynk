@@ -13,13 +13,13 @@ import { Url } from '../../models/url.model';
 import { ConfirmDeleteComponent } from '../../dialogs/confirm-delete/confirm-delete.component';
 import { toast, NgxSonnerToaster } from 'ngx-sonner';
 import { CommonModule } from '@angular/common';
-import { User } from '../../models/user.model';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
     imports: [CommonModule, RouterLink, ReactiveFormsModule, TuiButton, TuiInputModule, TuiTextfieldControllerModule,
-        TuiCardMedium, TuiTitle, TuiHeader, TuiSurface, TuiIcon, NgxSonnerToaster, TuiLoader
+        TuiCardMedium, TuiTitle, TuiHeader, TuiSurface, TuiIcon, NgxSonnerToaster, TuiLoader, TranslateModule
     ],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
     protected readonly toast = toast;
 
     public urls: any[];
-    private user: User;
+    private user: any;
     public loading: boolean = true;
     public activeIndex: number | null = null;
     public removingIndex: number | null = null;
@@ -39,7 +39,8 @@ export class DashboardComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private urlService: UrlService,
-        private clipboard: Clipboard
+        private clipboard: Clipboard,
+        private translate: TranslateService
     ) { }
 
     ngOnInit() {
@@ -102,7 +103,7 @@ export class DashboardComponent implements OnInit {
         setTimeout(() => {
             this.activeIndex = null;
         }, 2000);
-        toast('Url copied to clipboard', { duration: 2000 });
+        toast(this.translate.instant('DASHBOARD.COPIEDCLIPBOARD'), { duration: 2000 });
     }
 
     openUrlDetail(url?: Url) {

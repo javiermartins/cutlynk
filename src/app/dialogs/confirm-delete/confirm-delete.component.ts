@@ -3,6 +3,7 @@ import { TuiButton, TuiDialogContext } from '@taiga-ui/core';
 import { injectContext } from '@taiga-ui/polymorpheus';
 import { Url } from '../../models/url.model';
 import { UrlService } from '../../services/url/url.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 export class Props {
   url: Url;
@@ -11,7 +12,7 @@ export class Props {
 @Component({
   selector: 'app-confirm-delete',
   standalone: true,
-  imports: [TuiButton],
+  imports: [TuiButton, TranslateModule],
   templateUrl: './confirm-delete.component.html',
   styleUrl: './confirm-delete.component.scss'
 })
