@@ -23,6 +23,13 @@
         "LANGUAGE": "Idioma",
         "NAME": "Nombre"
     },
+    "LANDING": {
+        "TITLE": "Acorta tus urls con",
+        "DESCRIPTION": "Simplifica tus URLs y haz seguimiento de su rendimiento con este acortador de enlaces fácil de usar",
+        "SHORTENURL": "Acortar URL",
+        "VIEWONGITHUB": "Ver en GitHub",
+        "DEVELOPEDBY": "Desarrollado por"
+    },
     "LANGUAGES": {
         "ENGLISH": "Inglés",
         "SPANISH": "Español"

@@ -23,6 +23,13 @@
         "LANGUAGE": "Language",
         "NAME": "Name"
     },
+    "LANDING": {
+        "TITLE": "Shorten your urls with",
+        "DESCRIPTION": "Simplify your URLs and track their performance with this easy-to-use link shortener",
+        "SHORTENURL": "Shorten URL",
+        "VIEWONGITHUB": "View on GitHub",
+        "DEVELOPEDBY": "Developed by"
+    },
     "LANGUAGES": {
         "ENGLISH": "English",
         "SPANISH": "Spanish"
