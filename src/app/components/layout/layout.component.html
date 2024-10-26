@@ -1,6 +1,10 @@
-@if(user) {
+@if(!loading && user) {
 <app-header></app-header>
 <main>
     <router-outlet></router-outlet>
 </main>
+} @else {
+<div class="fixed top-2/4 h-screen w-screen">
+    <tui-loader [inheritColor]="true" />
+</div>
 }
