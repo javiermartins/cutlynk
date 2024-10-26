@@ -14,6 +14,7 @@
         "CONFIRMDELETEDESCRIPTION": "This action cannot be undone, and the URL will be permanently removed from your list.",
         "COPIEDCLIPBOARD": "Url copied to clipboard",
         "DESCRIPTION": "Description",
+        "NOURLS": "There are no urls at the moment",
         "SHORTURL": "Short url",
         "SEARCHURLS": "Search urls",
         "URL": "URL"

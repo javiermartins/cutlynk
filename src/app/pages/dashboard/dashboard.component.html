@@ -49,7 +49,10 @@
                     </footer>
                 </div>
                 } @empty {
-                Empty list of urls
+                <div
+                    class="flex justify-center items-center col-span-full text-xl py-5 text-[var(--tui-text-tertiary)]">
+                    <tui-icon icon="@tui.unlink" class="mr-2" /> {{ 'DASHBOARD.NOURLS' | translate }}
+                </div>
                 }
             </div>
             } @else {
