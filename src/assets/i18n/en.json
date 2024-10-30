@@ -5,7 +5,8 @@
         "LOGOUT": "Logout",
         "SAVE": "Save",
         "SETTINGS": "Settings",
-        "SINGINGOOGLE": "Sign in with Google"
+        "SINGINGOOGLE": "Sign in with Google",
+        "VERSION": "Version"
     },
     "DASHBOARD": {
         "ADDURL": "Add url",

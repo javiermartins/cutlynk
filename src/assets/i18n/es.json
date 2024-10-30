@@ -5,7 +5,8 @@
         "LOGOUT": "Cerrar sesión",
         "SAVE": "Guardar",
         "SETTINGS": "Ajustes",
-        "SINGINGOOGLE": "Iniciar sesión con Google"
+        "SINGINGOOGLE": "Iniciar sesión con Google",
+        "VERSION": "Versión"
     },
     "DASHBOARD": {
         "ADDURL": "Añadir url",

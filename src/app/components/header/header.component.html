@@ -1,6 +1,8 @@
-<header tuiNavigationHeader class="!py-7">
+<header tuiNavigationHeader class="!px-6 !py-7">
     <span tuiNavigationLogo>
-        <a tuiFade class="text-lg" [routerLink]="['dashboard']">Cutlynk</a>
+        <img src="assets/img/url.svg" alt="URL icon" width="25px" class="mr-1">
+        <a tuiFade class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#ffffff] to-[#d8dada]"
+            [routerLink]="['dashboard']">Cutlynk</a>
     </span>
     <hr />
     <button [style.border-radius.%]="100" [tuiDropdown]="content" [(tuiDropdownOpen)]="openMenu">

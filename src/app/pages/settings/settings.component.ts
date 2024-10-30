@@ -10,6 +10,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Language } from '../../models/language.model';
 import languages from '../../data/languages';
 import { SettingsService } from '../../services/settings/settings.service';
+import { version } from '../../../../package.json';
 
 @Component({
   selector: 'app-settings',
@@ -23,6 +24,7 @@ import { SettingsService } from '../../services/settings/settings.service';
 })
 export class SettingsComponent {
 
+  public version: string = version;
   public user: any;
   public urlForm: FormGroup;
   public languages: Language[] = languages;
