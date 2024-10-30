@@ -4,6 +4,7 @@ import { account } from '../../../lib/appwrite';
 import { OAuthProvider } from 'appwrite';
 import { TuiButton } from '@taiga-ui/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent {
 
   async loginWithGoogle() {
     try {
-      await account.createOAuth2Session(OAuthProvider.Google, 'http://localhost:4200/dashboard', 'http://localhost:4200/error');
+      await account.createOAuth2Session(OAuthProvider.Google, `${environment.BASE_URL}/dashboard`, `${environment.BASE_URL}/error`);
     } catch (error) {
       console.error(error)
     }

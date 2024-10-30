@@ -33,8 +33,8 @@ export class RedirectComponent {
     this.urlService.getUrlByShortUrl(this.shortUrl).then(async (response) => {
       const urlData: any = response.documents[0];
       if (urlData && urlData.originalUrl) {
-        await this.incrementClicks(urlData);
         window.location.href = urlData.originalUrl;
+        await this.incrementClicks(urlData);
       } else {
         this.router.navigate(['/error']);
       }

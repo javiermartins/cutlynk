@@ -15,6 +15,7 @@ import { toast, NgxSonnerToaster } from 'ngx-sonner';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SearchPipe } from '../../utils/pipes/search.pipe';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-dashboard',
@@ -101,7 +102,7 @@ export class DashboardComponent implements OnInit {
     }
 
     copyUrlToClipboard(url: any, index: number) {
-        this.clipboard.copy(`http://localhost:4200/${url.shortUrl}`);
+        this.clipboard.copy(`${environment.BASE_URL}/${url.shortUrl}`);
         this.activeIndex = index;
         setTimeout(() => {
             this.activeIndex = null;
