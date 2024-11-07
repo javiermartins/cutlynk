@@ -1,8 +1,9 @@
-<header tuiNavigationHeader class="!px-6 !py-7">
-    <span tuiNavigationLogo>
-        <img src="assets/img/url.svg" alt="URL icon" width="25px" class="mr-1">
-        <a tuiFade class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#ffffff] to-[#d8dada]"
-            [routerLink]="['dashboard']">Cutlynk</a>
+<header tuiNavigationHeader class="sm:!px-6 !py-7">
+    <span tuiNavigationLogo class="cursor-pointer" [routerLink]="['dashboard']">
+        <img src="assets/img/url.svg" alt="URL icon" width="25px">
+        <a tuiFade class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#ffffff] to-[#d8dada]">
+            Cutlynk
+        </a>
     </span>
     <hr />
     <button [style.border-radius.%]="100" [tuiDropdown]="content" [(tuiDropdownOpen)]="openMenu">

@@ -15,7 +15,7 @@
         "CONFIRMDELETEDESCRIPTION": "Esta acción no se puede deshacer y la URL se eliminará permanentemente de tu lista.",
         "COPIEDCLIPBOARD": "Url copiada al portapapeles",
         "DESCRIPTION": "Descripción",
-        "NOURLS": " No existen urls por el momento",
+        "NOURLS": "No se han encontrado urls",
         "SHORTURL": "Url corta",
         "SEARCHURLS": "Buscar urls",
         "URL": "URL"

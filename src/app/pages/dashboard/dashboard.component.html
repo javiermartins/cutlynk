@@ -19,10 +19,10 @@
                 @for (url of (urls | filter: searchUrl); track url.id) {
                 <div tuiCardMedium tuiSurface class="url-card shadow-sm transition-all duration-600"
                     [ngClass]="{'animate-fade-out': removingIndex === $index}">
-                    <header class="max-w-full">
+                    <header class="w-full max-w-full">
                         <h2 tuiTitle>
                             <a [href]="url.originalUrl" target="_blank" (click)="incrementClicks(url)"
-                                class="truncate">{{url.shortUrl}}</a>
+                                class="truncate py-1 transform transition-transform duration-300 ease-in-out hover:translate-x-1">{{url.shortUrl}}</a>
                             <span tuiSubtitle class="truncate">{{url.originalUrl}}</span>
                         </h2>
                     </header>

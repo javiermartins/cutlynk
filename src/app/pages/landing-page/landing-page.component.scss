@@ -3,3 +3,16 @@
     padding: 10px 20px;
     border-radius: 5px;
 }
+
+.background-landing {
+    background-image: url('/assets/img/bg-landing.webp');
+    background-size: cover;
+}
+
+.background-landing::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #ffffffa6;
+    z-index: 0;
+}
