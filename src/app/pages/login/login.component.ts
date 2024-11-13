@@ -5,11 +5,12 @@ import { OAuthProvider } from 'appwrite';
 import { TuiButton } from '@taiga-ui/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from '../../../environments/environment';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, TuiButton, TranslateModule],
+  imports: [FormsModule, TuiButton, TranslateModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
