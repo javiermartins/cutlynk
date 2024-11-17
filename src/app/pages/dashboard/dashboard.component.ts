@@ -16,13 +16,14 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SearchPipe } from '../../utils/pipes/search.pipe';
 import { environment } from '../../../environments/environment';
+import { User } from '../../models/user.model';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
     imports: [
-        CommonModule, FormsModule, RouterLink, ReactiveFormsModule, TuiButton, TuiInputModule, TuiTextfieldControllerModule,
-        TuiCardMedium, TuiTitle, TuiHeader, TuiSurface, TuiIcon, NgxSonnerToaster, TuiLoader, TranslateModule, SearchPipe
+        CommonModule, FormsModule, ReactiveFormsModule, TuiButton, TuiInputModule, TuiTextfieldControllerModule,
+        TuiCardMedium, TuiTitle, TuiSurface, TuiIcon, NgxSonnerToaster, TuiLoader, TranslateModule, SearchPipe
     ],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
@@ -33,8 +34,8 @@ export class DashboardComponent implements OnInit {
     private readonly injector = inject(INJECTOR);
     protected readonly toast = toast;
 
-    public urls: any[];
-    private user: any;
+    public urls: Url[];
+    private user: User;
     public loading: boolean = true;
     public activeIndex: number | null = null;
     public removingIndex: number | null = null;
@@ -62,7 +63,7 @@ export class DashboardComponent implements OnInit {
 
     async getUserUrls() {
         this.urlService.getUserUrls(this.user.$id).then((urls) => {
-            this.urls = urls.documents;
+            this.urls = urls.documents as Url[];
         }).finally(() => {
             this.loading = false;
         });
@@ -101,7 +102,7 @@ export class DashboardComponent implements OnInit {
             });
     }
 
-    copyUrlToClipboard(url: any, index: number) {
+    copyUrlToClipboard(url: Url, index: number) {
         this.clipboard.copy(`${environment.BASE_URL}/${url.shortUrl}`);
         this.activeIndex = index;
         setTimeout(() => {

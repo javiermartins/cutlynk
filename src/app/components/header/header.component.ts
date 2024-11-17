@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { TuiAppearance, TuiButton, TuiDataList, TuiDropdown, TuiIcon } from '@taiga-ui/core';
-import { TuiAvatar } from '@taiga-ui/kit';
-import { TuiHeader, TuiNavigation } from '@taiga-ui/layout';
-import { AuthService } from '../../services/auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { TuiAppearance, TuiDataList, TuiDropdown, TuiIcon } from '@taiga-ui/core';
+import { TuiAvatar } from '@taiga-ui/kit';
+import { TuiNavigation } from '@taiga-ui/layout';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,8 +13,6 @@ import { TranslateModule } from '@ngx-translate/core';
     RouterLink,
     TuiAppearance,
     TuiAvatar,
-    TuiButton,
-    TuiHeader,
     TuiIcon,
     TuiNavigation,
     TuiDataList,

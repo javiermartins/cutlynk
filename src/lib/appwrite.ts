@@ -7,6 +7,7 @@ client
     .setEndpoint(environment.API_ENDPOINT)
     .setProject(environment.PROJECT_ID);
 
-export const account = new Account(client);
+export const account: Account = new Account(client);
 export const user: any = account.get();
+
 export { ID } from 'appwrite';

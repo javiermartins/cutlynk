@@ -83,13 +83,13 @@ export class UrlDetailComponent {
     }
   }
 
-  getUrlData() {
+  getUrlData(): Url {
     return {
       originalUrl: this.urlForm.controls['originalUrl'].value,
       shortUrl: this.urlForm.controls['shortUrl'].value,
       userId: this.context.data.user.$id,
       description: this.urlForm.controls['description'].value
-    }
+    } as Url;
   }
 
   base62Encode() {

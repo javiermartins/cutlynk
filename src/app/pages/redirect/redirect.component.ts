@@ -31,7 +31,7 @@ export class RedirectComponent {
 
   getUrlByShortUrl() {
     this.urlService.getUrlByShortUrl(this.shortUrl).then(async (response) => {
-      const urlData: any = response.documents[0];
+      const urlData: Url = response.documents[0] as Url;
       if (urlData && urlData.originalUrl) {
         window.location.href = urlData.originalUrl;
         await this.incrementClicks(urlData);

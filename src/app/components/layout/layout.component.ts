@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { HeaderComponent } from '../header/header.component';
 import { TranslateService } from '@ngx-translate/core';
 import { TuiLoader, tuiLoaderOptionsProvider } from '@taiga-ui/core';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-layout',
@@ -15,7 +16,7 @@ import { TuiLoader, tuiLoaderOptionsProvider } from '@taiga-ui/core';
 })
 export class LayoutComponent implements OnInit {
 
-  public user: any;
+  public user: User;
   public loading: boolean = true;
 
   constructor(
@@ -30,7 +31,7 @@ export class LayoutComponent implements OnInit {
 
   async getUser() {
     await this.authService.getUser()
-      .then((user: any) => {
+      .then((user: User) => {
         this.user = user;
         this.setUserLanguage();
       }).finally(() => {

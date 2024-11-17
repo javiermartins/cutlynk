@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ID, Query } from 'appwrite';
 import { environment } from '../../../environments/environment';
 import { ApiService } from '../api/api.service';
+import { Url } from '../../models/url.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class UrlService {
     private apiService: ApiService
   ) { }
 
-  async createShortenedUrl(urlData: any) {
+  async createShortenedUrl(urlData: Url) {
     await this.apiService.createDocument(environment.URL_COLLETION, ID.unique(), urlData);
   }
 

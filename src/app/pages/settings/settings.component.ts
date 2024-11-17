@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TuiButton, TuiDataList, TuiLabel } from '@taiga-ui/core';
+import { TuiDataList, TuiLabel } from '@taiga-ui/core';
 import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { AuthService } from '../../services/auth/auth.service';
 import { TuiDataListWrapper } from '@taiga-ui/kit';
@@ -11,13 +11,14 @@ import { Language } from '../../models/language.model';
 import languages from '../../data/languages';
 import { SettingsService } from '../../services/settings/settings.service';
 import { version } from '../../../../package.json';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [CommonModule,
-    ReactiveFormsModule, TuiButton, TuiInputModule, TuiLabel, TuiTextfieldControllerModule,
-    TuiDataList, TuiDataListWrapper, TuiSelectModule, TranslateModule
+  imports: [CommonModule, ReactiveFormsModule, TuiInputModule, TuiLabel,
+    TuiTextfieldControllerModule, TuiDataList, TuiDataListWrapper, TuiSelectModule,
+    TranslateModule
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss'
@@ -25,7 +26,7 @@ import { version } from '../../../../package.json';
 export class SettingsComponent {
 
   public version: string = version;
-  public user: any;
+  public user: User;
   public urlForm: FormGroup;
   public languages: Language[] = languages;
 
