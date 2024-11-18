@@ -1,7 +1,15 @@
 {
+    "CATEGORY": {
+        "CATEGORIES": "Categorías",
+        "CATEGORY": "Categoría",
+        "CATEGORYNAME": "Nombre de la categoría",
+        "UNCATEGORIZED": "Sin categoría"
+    },
     "COMMON": {
+        "ADD": "Añadir",
         "CANCEL": "Cancelar",
         "DELETE": "Eliminar",
+        "EDIT": "Editar",
         "LOGOUT": "Cerrar sesión",
         "SAVE": "Guardar",
         "SETTINGS": "Ajustes",

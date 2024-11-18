@@ -6,4 +6,5 @@ export interface Url extends Models.Document {
     clicks?: number;
     userId: string;
     description?: string;
+    categoryId?: string;
 }

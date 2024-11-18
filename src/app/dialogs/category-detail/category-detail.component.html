@@ -1,0 +1,23 @@
+<div>
+    <form [formGroup]="categoryForm">
+        <div>
+            <label tuiLabel>
+                <span class="label-text">{{ 'CATEGORY.CATEGORYNAME' | translate }}</span>
+                <tui-input formControlName="name" class="w-full no-shadow-input" tuiTextfieldSize="m"
+                    [tuiTextfieldLabelOutside]="true" [tuiAutoFocus]="true">
+                    <input tuiTextfieldLegacy />
+                </tui-input>
+            </label>
+        </div>
+    </form>
+
+    <div class="mt-8 text-right">
+        <button appearance="whiteblock" tuiButton type="button" size="m" class="mr-2" (click)="cancel()">
+            {{ 'COMMON.CANCEL' | translate }}
+        </button>
+        <button appearance="whiteblock" tuiButton type="button" size="m"
+            [disabled]="categoryForm.invalid || !this.categoryForm.dirty" (click)="save()">
+            {{ 'COMMON.SAVE' | translate }}
+        </button>
+    </div>
+</div>

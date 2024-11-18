@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { TranslateService } from '@ngx-translate/core';
 import { TuiLoader, tuiLoaderOptionsProvider } from '@taiga-ui/core';
 import { User } from '../../models/user.model';
+import { CategoryService } from '../../services/category/category.service';
 
 @Component({
   selector: 'app-layout',
@@ -21,7 +22,8 @@ export class LayoutComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private categoryService: CategoryService
   ) { }
 
   async ngOnInit() {
@@ -34,6 +36,7 @@ export class LayoutComponent implements OnInit {
       .then((user: User) => {
         this.user = user;
         this.setUserLanguage();
+        this.categoryService.getUserCategories(this.user.$id);
       }).finally(() => {
         this.loading = false;
       });

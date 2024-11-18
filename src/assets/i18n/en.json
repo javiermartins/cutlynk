@@ -1,7 +1,15 @@
 {
+    "CATEGORY": {
+        "CATEGORIES": "Categories",
+        "CATEGORY": "Category",
+        "CATEGORYNAME": "Category name",
+        "UNCATEGORIZED": "Uncategorized"
+    },
     "COMMON": {
+        "ADD": "Add",
         "CANCEL": "Cancel",
         "DELETE": "Delete",
+        "EDIT": "Edit",
         "LOGOUT": "Logout",
         "SAVE": "Save",
         "SETTINGS": "Settings",

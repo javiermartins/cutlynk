@@ -1,11 +1,10 @@
 import { Component, inject, INJECTOR, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { UrlService } from '../../services/url/url.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiInputModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { TuiButton, TuiDialogOptions, TuiDialogService, TuiIcon, TuiLoader, tuiLoaderOptionsProvider, TuiSurface, TuiTitle } from '@taiga-ui/core';
-import { TuiCardMedium, TuiHeader } from '@taiga-ui/layout';
+import { TuiCardMedium } from '@taiga-ui/layout';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { UrlDetailComponent } from '../../dialogs/url-detail/url-detail.component';
 import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
@@ -17,6 +16,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SearchPipe } from '../../utils/pipes/search.pipe';
 import { environment } from '../../../environments/environment';
 import { User } from '../../models/user.model';
+import { CategoriesComponent } from '../../dialogs/categories/categories.component';
 
 @Component({
     selector: 'app-dashboard',
@@ -130,6 +130,20 @@ export class DashboardComponent implements OnInit {
                     }
                 },
             });
+    }
+
+    openCategories() {
+        const dialogOptions: Partial<TuiDialogOptions<any>> = {
+            closeable: false,
+            dismissible: true,
+            data: {
+                user: this.user
+            }
+        }
+
+        this.dialogs
+            .open(new PolymorpheusComponent(CategoriesComponent, this.injector), dialogOptions)
+            .subscribe();
     }
 
 }

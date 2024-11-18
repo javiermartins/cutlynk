@@ -30,6 +30,27 @@
 
     <div>
         <label tuiLabel>
+            <span class="label-text">{{ 'CATEGORY.CATEGORY' | translate }}</span>
+            <tui-select formControlName="category" tuiTextfieldSize="m" class="no-shadow-input"
+                [valueContent]="stringify(categories)" [tuiTextfieldLabelOutside]="true">
+                <ng-template tuiDataList>
+                    <tui-data-list>
+                        <button tuiOption type="button" [value]="-1">
+                            {{ 'CATEGORY.UNCATEGORIZED' | translate }}
+                        </button>
+                        @for(category of categories; track category.$id) {
+                        <button tuiOption type="button" [value]="category.$id">
+                            {{ category.name }}
+                        </button>
+                        }
+                    </tui-data-list>
+                </ng-template>
+            </tui-select>
+        </label>
+    </div>
+
+    <div>
+        <label tuiLabel>
             <span class="label-text">{{ 'DASHBOARD.DESCRIPTION' | translate }}</span>
             <div class="short-link-container">
                 <tui-textarea formControlName="description" class="w-full no-shadow-input" [maxLength]="400">

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TuiButton, TuiDialogContext, TuiIcon, TuiLabel, TuiTextfield } from '@taiga-ui/core';
-import { TuiInputModule, TuiTextareaModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
+import { TuiButton, TuiDataList, TuiDialogContext, TuiIcon, TuiLabel, TuiTextfield } from '@taiga-ui/core';
+import { TuiInputModule, TuiSelectModule, TuiTextareaModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { injectContext } from '@taiga-ui/polymorpheus';
 import { UrlService } from '../../services/url/url.service';
 import { Constants } from '../../utils/constants';
@@ -9,12 +9,15 @@ import { Error } from '../../models/error.model';
 import { Url } from '../../models/url.model';
 import { User } from '../../models/user.model';
 import { toast, NgxSonnerToaster } from 'ngx-sonner';
-import { TuiAutoFocus } from '@taiga-ui/cdk';
-import { TranslateModule } from '@ngx-translate/core';
+import { TuiAutoFocus, TuiContext, tuiPure, TuiStringHandler } from '@taiga-ui/cdk';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TuiDataListWrapper } from '@taiga-ui/kit';
+import { CategoryService } from '../../services/category/category.service';
+import { Category } from '../../models/category.model';
 
 export class Props {
   user: User;
-  url: Url
+  url: Url;
 }
 
 @Component({
@@ -22,7 +25,8 @@ export class Props {
   standalone: true,
   imports: [
     ReactiveFormsModule, TuiButton, TuiInputModule, TuiLabel, TuiTextfieldControllerModule,
-    TuiTextfield, TuiTextareaModule, TuiIcon, NgxSonnerToaster, TuiAutoFocus, TranslateModule
+    TuiTextfield, TuiTextareaModule, TuiIcon, NgxSonnerToaster, TuiAutoFocus, TranslateModule,
+    TuiSelectModule, TuiDataList, TuiDataListWrapper
   ],
   templateUrl: './url-detail.component.html',
   styleUrl: './url-detail.component.scss'
@@ -31,6 +35,7 @@ export class UrlDetailComponent {
   protected readonly context =
     injectContext<TuiDialogContext<boolean, Props>>();
   protected readonly toast = toast;
+  public categories: Category[];
 
   private originalUrlPattern: string = '^(https?:\/\/)?([\\da-z.-]+)\\.[a-z.]{2,6}(\/[\\/\\w.-]*)*(\\?[\\w=&.-]+)?$';
   private shortUrlPattern: string = '^[a-zA-Z0-9-]+$';
@@ -39,12 +44,17 @@ export class UrlDetailComponent {
   public urlForm = new FormGroup({
     originalUrl: new FormControl(this.urlData ? this.urlData.originalUrl : '', [Validators.required, Validators.pattern(this.originalUrlPattern)]),
     shortUrl: new FormControl(this.urlData ? this.urlData.shortUrl : '', [Validators.required, Validators.pattern(this.shortUrlPattern)]),
-    description: new FormControl(this.urlData ? this.urlData.description : '')
+    category: new FormControl(this.urlData?.categoryId ? this.urlData.categoryId : -1),
+    description: new FormControl(this.urlData?.description ? this.urlData.description : '')
   });
 
   constructor(
-    private urlService: UrlService
-  ) { }
+    private urlService: UrlService,
+    private categoryService: CategoryService,
+    private translateService: TranslateService
+  ) {
+    this.getUserCategories();
+  }
 
   save() {
     if (this.urlData) {
@@ -84,12 +94,21 @@ export class UrlDetailComponent {
   }
 
   getUrlData(): Url {
+    const categoryId = this.urlForm.controls['category'].value;
+
     return {
       originalUrl: this.urlForm.controls['originalUrl'].value,
       shortUrl: this.urlForm.controls['shortUrl'].value,
       userId: this.context.data.user.$id,
+      categoryId: categoryId !== -1 ? categoryId : null,
       description: this.urlForm.controls['description'].value
     } as Url;
+  }
+
+  async getUserCategories() {
+    this.categoryService.categories$.subscribe((categories) => {
+      this.categories = categories;
+    });
   }
 
   base62Encode() {
@@ -107,6 +126,19 @@ export class UrlDetailComponent {
 
   cancel() {
     this.context.completeWith(false);
+  }
+
+  @tuiPure
+  protected stringify(items: any[]): TuiStringHandler<TuiContext<number>> {
+    const map = new Map(items.map(({ $id, name }) => [$id, name] as [number, string]));
+
+    return ({ $implicit }: TuiContext<number>) => {
+      if ($implicit === -1) {
+        return this.translateService.instant('CATEGORY.UNCATEGORIZED');
+      }
+
+      return map.get($implicit) || '';
+    };
   }
 
 }

@@ -6,6 +6,9 @@
             <input tuiTextfieldLegacy />
         </tui-input>
         <div class="flex mt-8 sm:justify-end sm:mt-0">
+            <button appearance="whiteblock" tuiButton type="button" size="m" class="mr-2" (click)="openCategories()">
+                <tui-icon icon="@tui.folders" />
+            </button>
             <button appearance="whiteblock" tuiButton type="button" size="m" (click)="openUrlDetail()">
                 <tui-icon icon="@tui.plus" /> {{ 'DASHBOARD.ADDURL' | translate }}
             </button>
@@ -37,11 +40,11 @@
                         </button>
                         <button appearance="whiteblock" iconStart="@tui.pencil" size="s" tuiIconButton type="button"
                             class="mr-1" (click)="openUrlDetail(url)">
-                            Edit
+                            {{ 'COMMON.EDIT' | translate }}
                         </button>
                         <button appearance="whiteblock" iconStart="@tui.trash" size="s" tuiIconButton type="button"
                             (click)="openDeleteUrl(url, $index)">
-                            Delete
+                            {{ 'COMMON.DELETE' | translate }}
                         </button>
                         <div class="clicks-container">
                             {{url.clicks}} {{ 'DASHBOARD.CLICKS' | translate }}
