@@ -1,21 +1,24 @@
 <div>
-    <div class="container px-4 grid grid-cols-1 sm:grid-cols-2 mx-auto my-12">
+    <div class="container px-4 grid grid-cols-1 sm:grid-cols-2 mx-auto mt-12 mb-8">
         <tui-input [(ngModel)]="searchUrl" class="no-shadow-input w-full" tuiTextfieldSize="m"
             tuiTextfieldIconLeft="@tui.search" [tuiTextfieldLabelOutside]="true">
             {{ 'DASHBOARD.SEARCHURLS' | translate }}
             <input tuiTextfieldLegacy />
         </tui-input>
-        <div class="flex mt-8 sm:justify-end sm:mt-0">
-            <button appearance="whiteblock" tuiButton type="button" size="m" class="mr-2" (click)="openCategories()">
+        <div class="flex mt-8 justify-end sm:mt-0">
+            <button appearance="whiteblock" tuiButton type="button" size="m" class="mr-2 !text-[#494c62]"
+                [tuiHint]="categoryService?.categoryFilter ? categoryService?.categoryFilter?.name : null"
+                (click)="openCategories()">
                 <tui-icon icon="@tui.folders" />
             </button>
-            <button appearance="whiteblock" tuiButton type="button" size="m" (click)="openUrlDetail()">
+            <button appearance="whiteblock" tuiButton type="button" size="m" class="!text-[#494c62]"
+                (click)="openUrlDetail()">
                 <tui-icon icon="@tui.plus" /> {{ 'DASHBOARD.ADDURL' | translate }}
             </button>
         </div>
     </div>
 
-    <div>
+    <div class="my-4">
         <div class="container mx-auto px-4">
             @if (!loading) {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">

@@ -17,8 +17,14 @@ export class UrlService {
     await this.apiService.createDocument(environment.URL_COLLETION, ID.unique(), urlData);
   }
 
-  async getUserUrls(userId: string) {
-    return await this.apiService.getDocuments(environment.URL_COLLETION, [Query.equal('userId', userId)]);
+  async getUserUrls(userId: string, categoryId?: string) {
+    const queries = [Query.equal('userId', userId)];
+
+    if (categoryId) {
+      queries.push(Query.equal('categoryId', categoryId));
+    }
+
+    return await this.apiService.getDocuments(environment.URL_COLLETION, queries);
   }
 
   async updateUrl(idUrl: string, urlData: any) {

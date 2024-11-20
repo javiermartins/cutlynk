@@ -1,21 +1,39 @@
 <div>
-    <div class="flex items-center justify-between px-4 pb-4">
-        <h2 class="text-2xl font-semibold">{{ 'CATEGORY.CATEGORIES' | translate }}</h2>
+    <div class="flex items-center justify-between px-4 flex-wrap">
+        <h2 class="text-2xl font-semibold mb-2">{{ 'CATEGORY.CATEGORIES' | translate }}</h2>
 
-        <button appearance="whiteblock" tuiButton type="button" size="m" class="mt-2" (click)="openCategoryDetail()">
-            <tui-icon icon="@tui.plus" /> {{ 'COMMON.ADD' | translate }}
-        </button>
+        <div class="flex flex-wrap ml-auto mb-2">
+            <button appearance="whiteblock" tuiButton type="button" size="m" class="mt-2 ml-2"
+                tuiHint="{{ 'CATEGORY.CLEANFILTER' | translate }}" (click)="cleanCategoryFilter()"
+                *ngIf="categoryService.categoryFilter">
+                <tui-icon icon="@tui.filter-x" />
+            </button>
+            <button appearance="whiteblock" tuiButton type="button" size="m" class="mt-2 ml-1"
+                (click)="openCategoryDetail()">
+                <tui-icon icon="@tui.plus" /> {{ 'COMMON.ADD' | translate }}
+            </button>
+        </div>
     </div>
 
-    <ul aria-label="Category list" class="space-y-1 max-h-[375px] overflow-y-auto px-1">
+    <ul aria-label="Category list" class="space-y-1 max-h-[375px] min-h-[300px] overflow-y-auto px-1">
         @for (category of categories; track $index) {
         <li role="option" tabindex="0" aria-selected="false"
-            class="bg-white rounded-md p-4 transition-all hover:bg-gray-200 cursor-pointer flex justify-between items-center">
-            <span>{{category.name}}</span>
-            <button appearance="whiteblock" iconStart="@tui.pencil" size="s" tuiIconButton type="button" class="ml-2"
-                (click)="openCategoryDetail($event, category)">
-                {{ 'COMMON.EDIT' | translate }}
-            </button>
+            [ngClass]="{'selected-category': categoryService.categoryFilter?.$id === category.$id}"
+            (click)="selectCategory(category)">
+            <div>
+                <tui-icon icon="@tui.check" class="mr-2" *ngIf="categoryService.categoryFilter?.$id === category.$id" />
+                <span class="mr-2">{{category.name}}</span>
+            </div>
+            <div>
+                <button appearance="whiteblock" iconStart="@tui.pencil" size="s" tuiIconButton type="button"
+                    class="mr-1" (click)="openCategoryDetail($event, category)">
+                    {{ 'COMMON.EDIT' | translate }}
+                </button>
+                <button appearance="whiteblock" iconStart="@tui.trash" size="s" tuiIconButton type="button"
+                    (click)="confirmDeleteCategory($event, category)">
+                    {{ 'COMMON.DELETE' | translate }}
+                </button>
+            </div>
         </li>
         }
     </ul>

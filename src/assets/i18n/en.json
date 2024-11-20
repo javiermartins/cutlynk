@@ -3,6 +3,9 @@
         "CATEGORIES": "Categories",
         "CATEGORY": "Category",
         "CATEGORYNAME": "Category name",
+        "CLEANFILTER": "Clean filter",
+        "CONFIRMDELETETITLE": "Delete this category?",
+        "CONFIRMDELETEDESCRIPTION": "This action will remove the category associated with each URL but will retain the data of the URLs.",
         "UNCATEGORIZED": "Uncategorized"
     },
     "COMMON": {

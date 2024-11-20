@@ -6,7 +6,9 @@ import { UrlService } from '../../services/url/url.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 export class Props {
-  url: Url;
+  header: string;
+  description: string;
+  url?: Url;
 }
 
 @Component({
@@ -24,10 +26,14 @@ export class ConfirmDeleteComponent {
     private urlService: UrlService
   ) { }
 
-  deleteUrl() {
-    this.urlService.deleteUrl(this.context.data.url.$id).then(() => {
+  delete() {
+    if (this.context.data?.url) {
+      this.urlService.deleteUrl(this.context.data.url.$id).then(() => {
+        this.context.completeWith(true);
+      });
+    } else {
       this.context.completeWith(true);
-    });
+    }
   }
 
   cancel() {

@@ -1,7 +1,7 @@
 <div>
-    <h2 class="text-2xl font-semibold">{{ 'DASHBOARD.CONFIRMDELETETITLE' | translate }}</h2>
+    <h2 class="text-2xl font-semibold">{{ context.data.header | translate }}</h2>
     <p class="text-base mt-4">
-        {{ 'DASHBOARD.CONFIRMDELETEDESCRIPTION' | translate }}
+        {{ context.data.description | translate }}
     </p>
 
     <div class="mt-4 text-right">
@@ -9,7 +9,7 @@
             {{ 'COMMON.CANCEL' | translate }}
         </button>
         <button appearance="whiteblock" tuiButton type="button" size="m" class="!bg-[#e36464ed] !text-white"
-            (click)="deleteUrl()">
+            (click)="delete()">
             {{ 'COMMON.DELETE' | translate }}
         </button>
     </div>

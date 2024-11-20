@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { UrlService } from '../../services/url/url.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiInputModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
-import { TuiButton, TuiDialogOptions, TuiDialogService, TuiIcon, TuiLoader, tuiLoaderOptionsProvider, TuiSurface, TuiTitle } from '@taiga-ui/core';
+import { TuiButton, TuiDialogOptions, TuiDialogService, TuiHintDirective, TuiIcon, TuiLoader, tuiLoaderOptionsProvider, TuiSurface, TuiTitle } from '@taiga-ui/core';
 import { TuiCardMedium } from '@taiga-ui/layout';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { UrlDetailComponent } from '../../dialogs/url-detail/url-detail.component';
@@ -17,13 +17,14 @@ import { SearchPipe } from '../../utils/pipes/search.pipe';
 import { environment } from '../../../environments/environment';
 import { User } from '../../models/user.model';
 import { CategoriesComponent } from '../../dialogs/categories/categories.component';
+import { CategoryService } from '../../services/category/category.service';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
     imports: [
         CommonModule, FormsModule, ReactiveFormsModule, TuiButton, TuiInputModule, TuiTextfieldControllerModule,
-        TuiCardMedium, TuiTitle, TuiSurface, TuiIcon, NgxSonnerToaster, TuiLoader, TranslateModule, SearchPipe
+        TuiCardMedium, TuiTitle, TuiSurface, TuiIcon, NgxSonnerToaster, TuiLoader, TranslateModule, SearchPipe, TuiHintDirective
     ],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
@@ -44,6 +45,7 @@ export class DashboardComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private urlService: UrlService,
+        public categoryService: CategoryService,
         private clipboard: Clipboard,
         private translate: TranslateService
     ) { }
@@ -62,7 +64,9 @@ export class DashboardComponent implements OnInit {
     }
 
     async getUserUrls() {
-        this.urlService.getUserUrls(this.user.$id).then((urls) => {
+        const categoryId = this.categoryService.categoryFilter?.$id;
+
+        this.urlService.getUserUrls(this.user.$id, categoryId).then((urls) => {
             this.urls = urls.documents as Url[];
         }).finally(() => {
             this.loading = false;
@@ -83,6 +87,8 @@ export class DashboardComponent implements OnInit {
             closeable: false,
             dismissible: true,
             data: {
+                header: 'DASHBOARD.CONFIRMDELETETITLE',
+                description: 'DASHBOARD.CONFIRMDELETEDESCRIPTION',
                 url: url
             }
         }
@@ -133,6 +139,7 @@ export class DashboardComponent implements OnInit {
     }
 
     openCategories() {
+        const categoryId = this.categoryService.categoryFilter?.$id;
         const dialogOptions: Partial<TuiDialogOptions<any>> = {
             closeable: false,
             dismissible: true,
@@ -143,7 +150,13 @@ export class DashboardComponent implements OnInit {
 
         this.dialogs
             .open(new PolymorpheusComponent(CategoriesComponent, this.injector), dialogOptions)
-            .subscribe();
+            .subscribe({
+                complete: () => {
+                    if (this.categoryService.categoryFilter?.$id != categoryId) {
+                        this.getUserUrls();
+                    }
+                }
+            });
     }
 
 }
