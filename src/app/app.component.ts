@@ -1,14 +1,13 @@
-import { TuiLoader, TuiRoot } from "@taiga-ui/core";
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
 import { TranslateService } from "@ngx-translate/core";
+import { TuiRoot } from "@taiga-ui/core";
 import languages from "./data/languages";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginComponent, TuiRoot, TuiLoader],
+  imports: [RouterOutlet, TuiRoot],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

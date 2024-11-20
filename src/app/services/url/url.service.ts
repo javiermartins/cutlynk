@@ -3,11 +3,15 @@ import { ID, Query } from 'appwrite';
 import { environment } from '../../../environments/environment';
 import { ApiService } from '../api/api.service';
 import { Url } from '../../models/url.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UrlService {
+
+  private urlSubject = new BehaviorSubject<Url[]>([]);
+  public urls$ = this.urlSubject.asObservable();
 
   constructor(
     private apiService: ApiService
@@ -24,7 +28,11 @@ export class UrlService {
       queries.push(Query.equal('categoryId', categoryId));
     }
 
-    return await this.apiService.getDocuments(environment.URL_COLLETION, queries);
+    return await this.apiService.getDocuments(environment.URL_COLLETION, queries).then((categories) => {
+      this.urlSubject.next(categories.documents as Url[]);
+    }).catch((error: Error) => {
+      console.error(error);
+    });;
   }
 
   async updateUrl(idUrl: string, urlData: any) {

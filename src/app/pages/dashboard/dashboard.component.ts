@@ -56,21 +56,24 @@ export class DashboardComponent implements OnInit {
 
     async getData() {
         await this.getUser();
-        await this.getUserUrls();
+        await this.loadUrls();
     }
 
     async getUser() {
         this.user = await this.authService.getUser();
     }
 
+    async loadUrls() {
+        await this.urlService.urls$.subscribe((urls) => {
+            this.urls = urls;
+        });
+        this.loading = false;
+    }
+
     async getUserUrls() {
         const categoryId = this.categoryService.categoryFilter?.$id;
-
-        this.urlService.getUserUrls(this.user.$id, categoryId).then((urls) => {
-            this.urls = urls.documents as Url[];
-        }).finally(() => {
-            this.loading = false;
-        });
+        await this.urlService.getUserUrls(this.user.$id, categoryId);
+        this.loading = false;
     }
 
     async incrementClicks(url: Url) {

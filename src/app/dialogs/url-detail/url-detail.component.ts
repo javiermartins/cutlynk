@@ -44,7 +44,7 @@ export class UrlDetailComponent {
   public urlForm = new FormGroup({
     originalUrl: new FormControl(this.urlData ? this.urlData.originalUrl : '', [Validators.required, Validators.pattern(this.originalUrlPattern)]),
     shortUrl: new FormControl(this.urlData ? this.urlData.shortUrl : '', [Validators.required, Validators.pattern(this.shortUrlPattern)]),
-    category: new FormControl(this.urlData?.categoryId ? this.urlData.categoryId : -1),
+    category: new FormControl(this.getCategoryId()),
     description: new FormControl(this.urlData?.description ? this.urlData.description : '')
   });
 
@@ -62,6 +62,18 @@ export class UrlDetailComponent {
     } else {
       this.createShortenedUrl();
     }
+  }
+
+  getCategoryId() {
+    let value: any = -1;
+
+    if (this.urlData?.categoryId) {
+      value = this.urlData?.categoryId;
+    } else if (this.categoryService.categoryFilter?.$id) {
+      value = this.categoryService.categoryFilter.$id;
+    }
+
+    return value;
   }
 
   async updateUrl() {

@@ -10,8 +10,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CategoryService {
 
-  private projectsSubject = new BehaviorSubject<Category[]>([]);
-  public categories$ = this.projectsSubject.asObservable();
+  private categorySubject = new BehaviorSubject<Category[]>([]);
+  public categories$ = this.categorySubject.asObservable();
   public categoryFilter: Category | null = null
 
   constructor(
@@ -20,7 +20,7 @@ export class CategoryService {
 
   async getUserCategories(userId: string) {
     return await this.apiService.getDocuments(environment.CATEGORY_COLLETION, [Query.equal('userId', userId)]).then((categories) => {
-      this.projectsSubject.next(categories.documents as Category[]);
+      this.categorySubject.next(categories.documents as Category[]);
     }).catch((error: Error) => {
       console.error(error);
     });

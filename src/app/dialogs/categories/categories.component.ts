@@ -104,9 +104,9 @@ export class CategoriesComponent {
       });
   }
 
-  deleteCategoryIdOfUrls(category: Category) {
-    this.urlService.getUserUrls(this.context.data.user.$id, category.$id).then(async (urls) => {
-      await urls.documents.forEach(async (url) => {
+  async deleteCategoryIdOfUrls(category: Category) {
+    await this.urlService.urls$.subscribe(async (urls) => {
+      await urls.forEach(async (url) => {
         const data: Url = { categoryId: null } as Url;
         await this.urlService.updateUrl(url.$id, data).then();
       });
@@ -118,9 +118,9 @@ export class CategoriesComponent {
     await this.categoryService.deleteCategory(category.$id).then(() => {
       this.categoryService.getUserCategories(this.context.data.user.$id);
       if (this.categoryService.categoryFilter?.$id == category.$id) {
-        //TODO: get urls
         this.cleanCategoryFilter();
       }
+      this.urlService.getUserUrls(this.context.data.user.$id, this.categoryService.categoryFilter?.$id);
     }).catch((error: Error) => {
       console.error(error);
     });
