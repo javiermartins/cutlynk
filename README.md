@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 
 <a href="">
-  <img src="src/assets/img/readme.png" alt="Logo" />
+  <img src="src/assets/img/readme.png" alt="Logo" style="border-radius: 10px;" />
 </a>
 
 <!-- ABOUT THE PROJECT -->
