@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TuiButton, TuiIcon } from '@taiga-ui/core';
 import { AuthService } from '../../services/auth/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-error',
   standalone: true,
-  imports: [TuiButton, TuiIcon],
+  imports: [TuiButton, TuiIcon, TranslateModule],
   templateUrl: './error.component.html',
   styleUrl: './error.component.scss'
 })

@@ -31,6 +31,11 @@
         "SEARCHURLS": "Buscar urls",
         "URL": "URL"
     },
+    "ERROR": {
+        "GOHOME": "Volver a la home",
+        "NOTFOUNDDESCRIPTION": "La url puede estar rota o ha sido eliminada",
+        "PAGENOTFOUND": "Página no encontrada"
+    },
     "SETTINGS": {
         "EMAIL": "Email",
         "LANGUAGE": "Idioma",

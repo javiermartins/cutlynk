@@ -31,6 +31,11 @@
         "SEARCHURLS": "Search urls",
         "URL": "URL"
     },
+    "ERROR": {
+        "GOHOME": "Go home",
+        "NOTFOUNDDESCRIPTION": "The url may be broken or has been removed",
+        "PAGENOTFOUND": "Page not found"
+    },
     "SETTINGS": {
         "EMAIL": "Email",
         "LANGUAGE": "Language",
