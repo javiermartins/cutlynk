@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 
-<a href="">
+<a href="https://cutlynk.dev/">
   <img src="src/assets/img/readme.png" alt="Logo" style="border-radius: 10px;" />
 </a>
 

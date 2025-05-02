@@ -8,7 +8,7 @@
         <div class="flex mt-8 justify-end sm:mt-0">
             <button appearance="whiteblock" tuiButton type="button" size="m" class="mr-2 !text-[#494c62]"
                 [tuiHint]="categoryService?.categoryFilter ? categoryService?.categoryFilter?.name : null"
-                (click)="openCategories()">
+                [attr.aria-label]="'DASHBOARD.OPENCATEGORIES' | translate" (click)="openCategories()">
                 <tui-icon icon="@tui.folders" />
             </button>
             <button appearance="whiteblock" tuiButton type="button" size="m" class="!text-[#494c62]"
@@ -19,6 +19,7 @@
     </div>
 
     <div class="my-4">
+        <h1 class="sr-only">{{ 'COMMON.HOMESCREEN' | translate }}</h1>
         <div class="container mx-auto px-4">
             @if (!loading) {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
@@ -36,11 +37,14 @@
                         <button appearance="whiteblock" size="s" tuiIconButton type="button" class="mr-1"
                             (click)="copyUrlToClipboard(url, $index)">
                             @if(activeIndex !== $index) {
+                            {{ 'DASHBOARD.COPYTOCLIPBOARD' | translate }}
                             <tui-icon icon="@tui.copy" [style.color]="'var(--tui-text-tertiary)'" />
                             } @else {
+                            {{ 'DASHBOARD.COPIEDCLIPBOARD' | translate }}
                             <tui-icon icon="@tui.check" class="text-[#008a2e99]" />
                             }
                         </button>
+
                         <button appearance="whiteblock" iconStart="@tui.pencil" size="s" tuiIconButton type="button"
                             class="mr-1" (click)="openUrlDetail(url)">
                             {{ 'COMMON.EDIT' | translate }}

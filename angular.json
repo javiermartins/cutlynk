@@ -20,6 +20,7 @@
             "outputPath": "dist/cutlynk",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "watch": true,
             "polyfills": [
               "zone.js"
             ],
@@ -28,6 +29,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/sitemap.xml",
+              "src/robots.txt",
               {
                 "glob": "**/*",
                 "input": "node_modules/@taiga-ui/icons/src",
@@ -73,9 +76,12 @@
           "configurations": {
             "production": {
               "buildTarget": "cutlynk:build:production"
+            },
+            "development": {
+              "buildTarget": "cutlynk:build"
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@ngx-env/builder:extract-i18n",

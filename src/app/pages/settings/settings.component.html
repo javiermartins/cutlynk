@@ -1,5 +1,6 @@
 @if (user) {
 <div class="settings-container">
+    <h1 class="sr-only">{{ 'COMMON.SETTINGSSCREEN' | translate }}</h1>
     <form [formGroup]="urlForm" class="card-container">
         <div>
             <label tuiLabel>
@@ -30,7 +31,7 @@
                         <tui-data-list>
                             <button *ngFor="let language of languages" tuiOption type="button" [value]="language"
                                 (click)="changeLanguage(language.id)">
-                                <img [src]="'assets/img/flags/'+language.id+'.webp'" alt="Flag image" width="28px" />
+                                <img [src]="'assets/img/flags/'+language.id+'.webp'" alt="" width="28px" />
                                 <span class="ml-2">{{language.value | translate}}</span>
                             </button>
                         </tui-data-list>
@@ -38,7 +39,7 @@
                 </tui-select>
             </label>
             <ng-template #value let-language>
-                <img [src]="'assets/img/flags/'+language.id+'.webp'" alt="Flag image" width="20px" />
+                <img [src]="'assets/img/flags/'+language.id+'.webp'" alt="" width="20px" />
                 <span class="ml-2">{{language.value | translate}}</span>
             </ng-template>
         </div>

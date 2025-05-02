@@ -13,10 +13,14 @@
         "CANCEL": "Cancelar",
         "DELETE": "Eliminar",
         "EDIT": "Editar",
+        "HOMESCREEN": "Pantalla de inicio",
         "LOGOUT": "Cerrar sesión",
+        "NAVIGATEHOMESCREEN": "Ir a la pantalla de inicio",
         "SAVE": "Guardar",
         "SETTINGS": "Ajustes",
+        "SETTINGSSCREEN": "Pantalla de ajustes",
         "SINGINGOOGLE": "Iniciar sesión con Google",
+        "USER_MENU": "Menú de usuario",
         "VERSION": "Versión"
     },
     "DASHBOARD": {
@@ -25,8 +29,10 @@
         "CONFIRMDELETETITLE": "¿Eliminar esta url?",
         "CONFIRMDELETEDESCRIPTION": "Esta acción no se puede deshacer y la URL se eliminará permanentemente de tu lista.",
         "COPIEDCLIPBOARD": "Url copiada al portapapeles",
+        "COPYTOCLIPBOARD": "Copiar URL al portapapeles",
         "DESCRIPTION": "Descripción",
         "NOURLS": "No se han encontrado urls",
+        "OPENCATEGORIES": "Abrir categorías",
         "SHORTURL": "Url corta",
         "SEARCHURLS": "Buscar urls",
         "URL": "URL"

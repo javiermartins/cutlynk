@@ -13,10 +13,14 @@
         "CANCEL": "Cancel",
         "DELETE": "Delete",
         "EDIT": "Edit",
+        "HOMESCREEN": "Home screen",
         "LOGOUT": "Logout",
+        "NAVIGATEHOMESCREEN": "Go to the home screen",
         "SAVE": "Save",
         "SETTINGS": "Settings",
+        "SETTINGSSCREEN": "Settings screen",
         "SINGINGOOGLE": "Sign in with Google",
+        "USER_MENU": "User menu",
         "VERSION": "Version"
     },
     "DASHBOARD": {
@@ -25,8 +29,10 @@
         "CONFIRMDELETETITLE": "Delete this URL?",
         "CONFIRMDELETEDESCRIPTION": "This action cannot be undone, and the URL will be permanently removed from your list.",
         "COPIEDCLIPBOARD": "Url copied to clipboard",
+        "COPYTOCLIPBOARD": "Copy URL to clipboard",
         "DESCRIPTION": "Description",
         "NOURLS": "No urls found",
+        "OPENCATEGORIES": "Open categories",
         "SHORTURL": "Short url",
         "SEARCHURLS": "Search urls",
         "URL": "URL"
