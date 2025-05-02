@@ -2,11 +2,10 @@
     <div>
         <label tuiLabel>
             <span class="label-text">{{ 'DASHBOARD.URL' | translate }}</span>
-            <tui-input formControlName="originalUrl" class="w-full no-shadow-input" tuiTextfieldSize="m"
-                [tuiTextfieldLabelOutside]="true" [tuiAutoFocus]="urlData ? false : true">
-                https://
-                <input tuiTextfieldLegacy />
-            </tui-input>
+            <tui-textfield class="w-full no-shadow-input" tuiTextfieldSize="m" [tuiTextfieldCleaner]="false"
+                [tuiAutoFocus]="urlData ? false : true">
+                <input formControlName="originalUrl" tuiTextfield placeholder="https://" />
+            </tui-textfield>
         </label>
     </div>
 
@@ -14,13 +13,12 @@
         <label tuiLabel>
             <span class="label-text">{{ 'DASHBOARD.SHORTURL' | translate }}</span>
             <div class="short-link-container">
-                <tui-input formControlName="shortUrl" class="w-full no-shadow-input" tuiTextfieldSize="m"
-                    [tuiTextfieldLabelOutside]="true">
-                    <input tuiTextfieldLegacy />
-                </tui-input>
+                <tui-textfield class="w-full no-shadow-input" tuiTextfieldSize="m" [tuiTextfieldCleaner]="false">
+                    <input formControlName="shortUrl" tuiTextfield />
+                </tui-textfield>
                 @if(!urlData) {
                 <button appearance="whiteblock" tuiButton type="button" size="m" class="mx-2 !px-5"
-                    (click)="base62Encode()">
+                    (click)="base62Encode()" [attr.aria-label]="'DASHBOARD.GENERATERANDOMURL' | translate">
                     <tui-icon icon="@tui.shuffle" class="text-lg mr-2" />
                 </button>
                 }
@@ -52,10 +50,9 @@
     <div>
         <label tuiLabel>
             <span class="label-text">{{ 'DASHBOARD.DESCRIPTION' | translate }}</span>
-            <div class="short-link-container">
-                <tui-textarea formControlName="description" class="w-full no-shadow-input" [maxLength]="400">
-                </tui-textarea>
-            </div>
+            <tui-textfield class="no-shadow-input" [tuiTextfieldCleaner]="false">
+                <textarea tuiTextarea formControlName="description" class="w-full" [limit]="400" [min]="4"></textarea>
+            </tui-textfield>
         </label>
     </div>
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TuiDataList, TuiLabel } from '@taiga-ui/core';
+import { TuiDataList, TuiLabel, TuiTextfield } from '@taiga-ui/core';
 import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { AuthService } from '../../services/auth/auth.service';
 import { TuiDataListWrapper } from '@taiga-ui/kit';
@@ -18,7 +18,7 @@ import { User } from '../../models/user.model';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TuiInputModule, TuiLabel,
     TuiTextfieldControllerModule, TuiDataList, TuiDataListWrapper, TuiSelectModule,
-    TranslateModule
+    TranslateModule, TuiTextfield
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss'

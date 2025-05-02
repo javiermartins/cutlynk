@@ -23,9 +23,7 @@
 }
 
 .no-shadow-input {
-
-    [tuiWrapper],
-    [tuiWrapper]:hover:not(._no-hover) {
+    [tuiAppearance][data-appearance=textfield] {
         box-shadow: none;
     }
 }

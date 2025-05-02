@@ -1,10 +1,11 @@
 <div>
     <div class="container px-4 grid grid-cols-1 sm:grid-cols-2 mx-auto mt-12 mb-8">
-        <tui-input [(ngModel)]="searchUrl" class="no-shadow-input w-full" tuiTextfieldSize="m"
-            tuiTextfieldIconLeft="@tui.search" [tuiTextfieldLabelOutside]="true">
-            {{ 'DASHBOARD.SEARCHURLS' | translate }}
-            <input tuiTextfieldLegacy />
-        </tui-input>
+        <label tuiLabel>
+            <tui-textfield class="no-shadow-input w-full" tuiTextfieldSize="m"
+                iconStart="@tui.search" [tuiTextfieldLabelOutside]="true">
+                <input tuiTextfield [placeholder]="'DASHBOARD.SEARCHURLS' | translate" [(ngModel)]="searchUrl"/>
+            </tui-textfield>
+        </label>
         <div class="flex mt-8 justify-end sm:mt-0">
             <button appearance="whiteblock" tuiButton type="button" size="m" class="mr-2 !text-[#494c62]"
                 [tuiHint]="categoryService?.categoryFilter ? categoryService?.categoryFilter?.name : null"

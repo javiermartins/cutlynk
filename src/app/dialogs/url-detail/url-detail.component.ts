@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TuiButton, TuiDataList, TuiDialogContext, TuiIcon, TuiLabel, TuiTextfield } from '@taiga-ui/core';
-import { TuiInputModule, TuiSelectModule, TuiTextareaModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
+import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { injectContext } from '@taiga-ui/polymorpheus';
 import { UrlService } from '../../services/url/url.service';
 import { Constants } from '../../utils/constants';
@@ -11,7 +11,7 @@ import { User } from '../../models/user.model';
 import { toast, NgxSonnerToaster } from 'ngx-sonner';
 import { TuiAutoFocus, TuiContext, tuiPure, TuiStringHandler } from '@taiga-ui/cdk';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TuiDataListWrapper } from '@taiga-ui/kit';
+import { TuiDataListWrapper, TuiTextarea, TuiTextareaLimit } from '@taiga-ui/kit';
 import { CategoryService } from '../../services/category/category.service';
 import { Category } from '../../models/category.model';
 
@@ -25,8 +25,8 @@ export class Props {
   standalone: true,
   imports: [
     ReactiveFormsModule, TuiButton, TuiInputModule, TuiLabel, TuiTextfieldControllerModule,
-    TuiTextfield, TuiTextareaModule, TuiIcon, NgxSonnerToaster, TuiAutoFocus, TranslateModule,
-    TuiSelectModule, TuiDataList, TuiDataListWrapper
+    TuiTextfield, TuiTextarea, TuiIcon, NgxSonnerToaster, TuiAutoFocus, TranslateModule,
+    TuiSelectModule, TuiDataList, TuiDataListWrapper, TuiTextareaLimit
   ],
   templateUrl: './url-detail.component.html',
   styleUrl: './url-detail.component.scss'

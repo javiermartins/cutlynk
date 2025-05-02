@@ -5,20 +5,20 @@
         <div>
             <label tuiLabel>
                 <span class="label-text">{{ 'SETTINGS.NAME' | translate }}</span>
-                <tui-input formControlName="userName" class="w-full no-shadow-input" tuiTextfieldSize="m"
+                <tui-textfield class="w-full no-shadow-input" tuiTextfieldSize="m"
                     [tuiTextfieldLabelOutside]="true">
-                    <input tuiTextfieldLegacy />
-                </tui-input>
+                    <input formControlName="userName" tuiTextfield />
+                </tui-textfield>
             </label>
         </div>
 
         <div class="mt-4">
             <label tuiLabel>
                 <span class="label-text">{{ 'SETTINGS.EMAIL' | translate }}</span>
-                <tui-input formControlName="email" class="w-full no-shadow-input" tuiTextfieldSize="m"
+                <tui-textfield class="w-full no-shadow-input" tuiTextfieldSize="m"
                     [tuiTextfieldLabelOutside]="true">
-                    <input tuiTextfieldLegacy />
-                </tui-input>
+                    <input formControlName="email" tuiTextfield />
+                </tui-textfield>
             </label>
         </div>
 

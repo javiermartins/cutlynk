@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { UrlService } from '../../services/url/url.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiInputModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
-import { TuiButton, TuiDialogOptions, TuiDialogService, TuiHintDirective, TuiIcon, TuiLoader, tuiLoaderOptionsProvider, TuiSurface, TuiTitle } from '@taiga-ui/core';
+import { TuiButton, TuiDialogOptions, TuiDialogService, TuiHintDirective, TuiIcon, TuiLoader, tuiLoaderOptionsProvider, TuiSurface, TuiTextfield, TuiTitle } from '@taiga-ui/core';
 import { TuiCardMedium } from '@taiga-ui/layout';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { UrlDetailComponent } from '../../dialogs/url-detail/url-detail.component';
@@ -23,7 +23,7 @@ import { CategoryService } from '../../services/category/category.service';
     selector: 'app-dashboard',
     standalone: true,
     imports: [
-        CommonModule, FormsModule, ReactiveFormsModule, TuiButton, TuiInputModule, TuiTextfieldControllerModule,
+        CommonModule, FormsModule, ReactiveFormsModule, TuiButton, TuiInputModule, TuiTextfieldControllerModule, TuiTextfield,
         TuiCardMedium, TuiTitle, TuiSurface, TuiIcon, NgxSonnerToaster, TuiLoader, TranslateModule, SearchPipe, TuiHintDirective
     ],
     templateUrl: './dashboard.component.html',
@@ -117,7 +117,7 @@ export class DashboardComponent implements OnInit {
         setTimeout(() => {
             this.activeIndex = null;
         }, 2000);
-        toast(this.translate.instant('DASHBOARD.COPIEDCLIPBOARD'), { duration: 2000 });
+        toast.info(this.translate.instant('DASHBOARD.COPIEDCLIPBOARD'), { duration: 2000 });
     }
 
     openUrlDetail(url?: Url) {
