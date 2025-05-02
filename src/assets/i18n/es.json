@@ -58,5 +58,8 @@
     "LANGUAGES": {
         "ENGLISH": "Inglés",
         "SPANISH": "Español"
+    },
+    "META": {
+        "DESCRIPTION": "Acorta tus URLs fácilmente con Cutlynk. Simplifica enlaces y personalízalos con nuestra herramienta de acortador rápida y eficaz."
     }
 }

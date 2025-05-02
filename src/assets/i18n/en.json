@@ -58,5 +58,8 @@
     "LANGUAGES": {
         "ENGLISH": "English",
         "SPANISH": "Spanish"
+    },
+    "META": {
+        "DESCRIPTION": "Shorten your URLs easily with Cutlynk. Simplify and customize with our fast and user-friendly URL shortener."
     }
 }
