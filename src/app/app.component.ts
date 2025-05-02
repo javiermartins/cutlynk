@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TranslateService } from "@ngx-translate/core";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 import { TuiRoot } from "@taiga-ui/core";
 import languages from "./data/languages";
 
@@ -12,20 +12,32 @@ import languages from "./data/languages";
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  private translateService = inject(TranslateService);
 
-  ngOnInit() {
-    this.setLanguage();
+  constructor(
+    private translateService: TranslateService,
+    private renderer: Renderer2
+  ) { }
+
+  async ngOnInit() {
+    await this.setLanguage();
+
+    this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.renderer.setAttribute(document.documentElement, 'lang', event.lang);
+    });
   }
 
   async setLanguage() {
     const browserLang = this.translateService.getBrowserLang();
-    this.translateService.setDefaultLang(browserLang ? browserLang : 'en');
-    this.translateService.use(browserLang);
+    const defaultLang = browserLang ? browserLang : 'en';
+
+    this.translateService.setDefaultLang(defaultLang);
+    this.translateService.use(defaultLang);
 
     const supportedLangs = languages.map(language => language.id);
     supportedLangs.forEach((language) => {
       this.translateService.reloadLang(language);
     });
+
+    this.renderer.setAttribute(document.documentElement, 'lang', defaultLang);
   }
 }
