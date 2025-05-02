@@ -20,7 +20,6 @@
             "outputPath": "dist/cutlynk",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "watch": true,
             "polyfills": [
               "zone.js"
             ],
@@ -81,7 +80,7 @@
               "buildTarget": "cutlynk:build"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "production"
         },
         "extract-i18n": {
           "builder": "@ngx-env/builder:extract-i18n",
